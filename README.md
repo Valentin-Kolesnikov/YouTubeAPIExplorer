@@ -4,25 +4,25 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 
 ## Table of Contents  
 
-- [What do you have to use YouTube Explorer?:](#what-do-you-have-to-use-YouTube-Explorer?:)
-- [Now the program provides:](#now-the-program-provides:)
-- [Functionality:](#functionality:)
-- [How to get the YouTube API key?:](#how-to-get-the-YouTube-API-key?:)
+- [What do you have to use YouTube Explorer?](#-what-do-you-have-to-use-YouTube-Explorer?)
+- [Now the program provides](#-now-the-program-provides:)
+- [Functionality](#-functionality)
+- [How to get the YouTube API key?](#-how-to-get-the-YouTube-API-key?)
 
 
-## What do you have to use YouTube Explorer?:  
+## What do you have to use YouTube Explorer?  
 1. The YouTube API key.
 2. The video URL.
 3. Your desire to use YouTube Explorer.
 
-## 📌 Now the program provides:  
+## 📌 Now the program provides  
 - To receive the list of comments from YouTube videos in the console.
 - To filter the by keyword.
 - To sort by time or relevance.
 - to limit the number of output results.
 - To find out the channel's name where the video is hosted.
 
-## ⚙️ Functionality:  
+## ⚙️ Functionality  
 
 
 
@@ -33,7 +33,7 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 
 
 
-## How to get the YouTube API key?:  
+## How to get the YouTube API key?  
 1. You need to follow the link: https://console.cloud.google.com.
 2. You need to register for a Google account or log in to it.
 3. Next, you press the "Create or select a project" in the center of the page → "New project"
