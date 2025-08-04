@@ -8,6 +8,7 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 - [Now the program provides](#-now-the-program-provides)
 - [Functionality](#-functionality)
 - [How to get the YouTube API key?](#how-to-get-the-youtube-api-key)
+- [What do I plan to make in the future?](#what-do-i-plan-to-make-in-the-future?)
 
 
 ## What do you have to use YouTube Explorer?  
