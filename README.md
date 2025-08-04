@@ -5,10 +5,10 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 ## Table of Contents  
 
 - [What do you have to use YouTube Explorer?](#what-do-you-have-to-use-youtube-explorer)
-- [Now the program provides](#-now-the-program-provides)
+- [Now the program provides:](#-now-the-program-provides)
 - [Functionality](#-functionality)
 - [How to get the YouTube API key?](#how-to-get-the-youtube-api-key)
-- [What do I plan to make in the future?](#what-do-i-plan-to-make-in-the-future?)
+- [What do I plan to make in the future?](#what-do-i-plan-to-make-in-the-future)
 
 
 ## What do you have to use YouTube Explorer?  
@@ -23,7 +23,7 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 - to limit the number of output results.
 - To find out the channel's name where the video is hosted.
 
-## ⚙️ Functionality  
+## ⚙️ Functionality
 - **The API key** from Google Cloud Console (YouTube Data API v3) is being analyzed. If there is an error, it will ask you to enter it again.
 - the `video id`, which is required for the YouTube Data API, is extracted from the **YouTube video URL**.
 - **Keyword (optional)** — to filter comments. API will search for comments on this keyword.
