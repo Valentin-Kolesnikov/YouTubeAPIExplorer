@@ -1,6 +1,6 @@
 # YouTube Explorer (Console Beta vesion)  
 
-YouTube Explorer is a tool for searching, filtering, and displaying comments from YouTube videos by keywords using the YouTube Data API v3.  
+YouTube Explorer is an unofficial tool for searching, filtering, and displaying comments from YouTube videos by keywords using the YouTube Data API v3.  
 
 ## Table of Contents  
 
