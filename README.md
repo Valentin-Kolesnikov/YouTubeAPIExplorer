@@ -50,4 +50,5 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 ## 🔧 What do I plan to make in the future?  
 1. Add exception handling.
 2. The ability to specify **multiple** keywords.
-3. The ability to receive `Replies`
+3. The ability to receive `Replies`.
+4. The ability to save received comments. 
