@@ -6,9 +6,9 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 
 - [What do you have to use YouTube Explorer?](#what-do-you-have-to-use-youtube-explorer)
 - [Now the program provides:](#-now-the-program-provides)
-- [Functionality](#-functionality)
-- [How to get the YouTube API key?](#how-to-get-the-youtube-api-key)
-- [What do I plan to make in the future?](#what-do-i-plan-to-make-in-the-future)
+- [Functionality](#%EF%B8%8F-functionality)
+- [How to get the YouTube API key?](#-how-to-get-the-youtube-api-key)
+- [What do I plan to make in the future?](#-what-do-i-plan-to-make-in-the-future)
 
 
 ## What do you have to use YouTube Explorer?  
@@ -30,7 +30,7 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 - **The sorting method** is `by relevance` or `by time`. If you press Enter, `by relevance` will be entered.
 - **Number of comments** — output is limited at the user's request.
 
-## How to get the YouTube API key?  
+## ❓ How to get the YouTube API key?  
 1. You need to follow the link: https://console.cloud.google.com.
 
 2. You need to register for a Google account or log in to it.
@@ -47,7 +47,7 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
     
 8. The end of the way! Just copy your API key and paste it into the Windows notepad or somewhere else.
 
-## What do I plan to make in the future?  
+## 🔧 What do I plan to make in the future?  
 1. Add exception handling.
 2. The ability to specify **multiple** keywords.
 3. The ability to receive `Replies`
