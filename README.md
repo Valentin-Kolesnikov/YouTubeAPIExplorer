@@ -1,4 +1,4 @@
-# YouTube Explorer (Console Beta vesion)  
+# YouTube Explorer **(Console Beta vesion)**  
 
 YouTube Explorer is a tool for searching, filtering, and displaying comments from YouTube videos by keywords using the YouTube Data API v3.  
 
@@ -45,3 +45,8 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 7. At the top, click `Create credentials` → `API key`.
     
 8. The end of the way! Just copy your API key and paste it into the Windows notepad or somewhere else.
+
+## What do I plan to make in the future?  
+1. Add exception handling.
+2. The ability to specify **multiple** keywords.
+3. The ability to receive `Replies`
