@@ -4,7 +4,7 @@ YouTube Explorer is a tool for searching, filtering, and displaying comments fro
 
 ## Table of Contents  
 
-- [What do you have to use YouTube Explorer?:]([#what-do-you-have-to-use-YouTube-Explorer?:](https://github.com/Valentin-Kolesnikov/YouTubeSearcher#:~:text=YouTube%20API%20key%3F%3A-,What%20do%20you%20have%20to%20use%20YouTube%20Explorer%3F%3A,-The%20YouTube%20API))
+- [#what-do-you-have-to-use-YouTube-Explorer?:](https://github.com/Valentin-Kolesnikov/YouTubeSearcher#:~:text=YouTube%20API%20key%3F%3A-,What%20do%20you%20have%20to%20use%20YouTube%20Explorer%3F%3A,-The%20YouTube%20API)
 - [Now the program provides:](#now-the-program-provides:)
 - [Functionality:](#functionality:)
 - [How to get the YouTube API key?:](#how-to-get-the-YouTube-API-key?:)
