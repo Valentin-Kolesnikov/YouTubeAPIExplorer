@@ -2,6 +2,10 @@
 
 YouTube Explorer is an unofficial tool for searching, filtering, and displaying comments from YouTube videos by keywords using the YouTube Data API v3.  
 
+## Important clarification!!!  
+
+The `.exe` file does not have viruses. It was created for convenience. I made this file thanks to `python -m PyInstaller --onefile ...`. If you do not trust the `.exe` file, I recommend you to use the `.py` file.
+
 ## Table of Contents  
 
 - [What do you have to use YouTube Explorer?](#what-do-you-have-to-use-youtube-explorer)
