@@ -55,4 +55,5 @@ The `.exe` file does not have viruses. It was created for convenience. I made th
 1. Add exception handling.
 2. The ability to specify **multiple** keywords.
 3. The ability to receive `Replies`.
-4. The ability to save received comments. 
+4. The ability to save received comments.
+5. Search for videos and channels
