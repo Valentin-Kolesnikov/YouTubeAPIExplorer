@@ -1,13 +1,7 @@
 from googleapiclient.discovery import build
 import re
-import requests
-
-def find_channel_name(video_id, api_key):
-    name = requests.get(
-        "https://www.googleapis.com/youtube/v3/videos",
-        params={"part": "snippet", "id": video_id, "key": api_key}
-    )
-    return name.json()["items"][0]["snippet"]["channelTitle"]
+from ChannelExplorer import channel_name
+import os
 
 def youtube_api_key(api_key):
     while True:
@@ -26,49 +20,40 @@ def youtube_id_finder(url):
         else:
             url = input("\nTry entering the url again: ")
 
-
-api_key = input("\nEnter your YouTube API key: ")
-
-youtube = youtube_api_key(api_key)
-
-url = input("\nEnter the url: ")     
-video_id = youtube_id_finder(url)
-                                            
-channel = find_channel_name(video_id, api_key)
-
-while True:
-    search_terms = input("\nEnter the keyword (press Enter to continue without the keyword): ")
-    if search_terms:
-        break
-    elif not search_terms:
-        break
-
-which_order = input("\nDo you need to sort comments? By relevance - 1; By time - 2: ")
-if which_order == "1":
-    which_order = "relevance"
-elif which_order == "2":
-    which_order = "time"
-else:
-    which_order = "relevance"
-
-def collect_comments(video_id, search_terms, which_order):
+def collect_comments(video_id, search_terms, which_order, youtube):
     comments = []
     next_page_token = None
 
+    if which_order == "1":
+        which_order = "relevance"
+    elif which_order == "2":
+        which_order = "time"
+    else:
+        which_order = "relevance"
+
     while True:
         request = youtube.commentThreads().list(
-            part= "snippet",
+            part= "snippet,replies",
             videoId= video_id,
             pageToken= next_page_token,
-            maxResults= 100,
+            maxResults= 50,
             textFormat= "plainText",
             order= which_order,
         ).execute()
 
         for item in request["items"]:
             comment = item["snippet"]["topLevelComment"]["snippet"]["textDisplay"]
-            if search_terms.lower() in comment.lower():
+            if any(search_term.lower() in comment.lower() for search_term in search_terms):
                 comments.append(comment)
+
+            if "replies" in item:
+                for reply in item["replies"]["comments"]:
+                    reply_comments = reply["snippet"]["textDisplay"]
+                    if any(reply_term.lower() in reply_comments.lower() for reply_term in search_terms):
+                        comments.append(reply_comments)
+
+
+        comments = list(set(comments))
 
         next_page_token = request.get("nextPageToken")
         if not next_page_token:
@@ -76,12 +61,8 @@ def collect_comments(video_id, search_terms, which_order):
 
     return comments
 
-comments = collect_comments(video_id, search_terms, which_order)
-
-number = int(input("\nHow many comments do you need?: "))
-
-print(f"\n\nChannel: {channel}\n")
-for i, c in enumerate(comments[:number], 1):
-    print(f"{i}: {c}")
-
-input("Press Enter to exit...")
+def numberofcomments(comments, number, channel):
+    os.system('cls')
+    print(f"Channel: {channel}")
+    for i, c in enumerate(comments[:number], 1):
+        print(f"\n\n{i}:\n{c}")
