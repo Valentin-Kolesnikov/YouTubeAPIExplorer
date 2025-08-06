@@ -4,7 +4,7 @@ YouTube Explorer is an unofficial tool for searching, filtering, and displaying 
 
 ## Important clarification!!!  
 
-The .exe file is in releases. This `.exe` file does not have viruses. It was created for convenience. I made this file thanks to `python -m PyInstaller --onefile ...`. If you do not trust the `.exe` file, I recommend you to use the `.py` file.
+The .exe file is in releases. This `.exe` file does not have viruses. It was created for convenience. I made this file thanks to `python -m PyInstaller --onefile ...`. If you do not trust the `.exe` file, I recommend you to use the `.py` file in `Sources`.
 
 ## Table of Contents  
 
@@ -15,7 +15,7 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 - [What do I plan to make in the future?](#-what-do-i-plan-to-make-in-the-future)
 
 
-## What do you have to use YouTube Explorer?  
+## What do you need to use YouTube Explorer?  
 1. The YouTube API key.
 2. The video URL.
 3. Your desire to use **YouTube Explorer**.
@@ -30,7 +30,7 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 ## ⚙️ Functionality
 - **The API key** from Google Cloud Console (YouTube Data API v3) is being analyzed. If there is an error, it will ask you to enter it again.
 - the `video id`, which is required for the YouTube Data API, is extracted from the **YouTube video URL**.
-- **Keyword (optional)** — to filter comments. API will search for comments on this keyword.
+- **Keywords (optional)** — to filter comments. YouTube Explorer will search for comments on these keywords. YouTube Data API will not help it.
 - **The sorting method** is `by relevance` or `by time`. If you press Enter, `by relevance` will be entered.
 - **Number of comments** — output is limited at the user's request.
 
@@ -53,7 +53,6 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 
 ## 🔧 What do I plan to make in the future?  
 1. Add exception handling.
-2. The ability to specify **multiple** keywords.
-3. The ability to receive `Replies`.
-4. The ability to save received comments.
-5. Search for videos and channels
+2. The ability to save received comments.
+3. Search for videos and channels.
+4. Fix `Replies` if it is a problem
