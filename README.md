@@ -4,7 +4,7 @@ YouTube Explorer is an unofficial tool for searching, filtering, and displaying 
 
 ## Important clarification!!!  
 
-The `.exe` file does not have viruses. It was created for convenience. I made this file thanks to `python -m PyInstaller --onefile ...`. If you do not trust the `.exe` file, I recommend you to use the `.py` file.
+The .exe file is in releases. This `.exe` file does not have viruses. It was created for convenience. I made this file thanks to `python -m PyInstaller --onefile ...`. If you do not trust the `.exe` file, I recommend you to use the `.py` file.
 
 ## Table of Contents  
 
