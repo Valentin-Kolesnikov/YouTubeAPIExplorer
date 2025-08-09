@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# PyInstaller
+*.spec
+/build/
+/dist/
+*.exe
+
+# IDE / редакторы
+.vscode/
+.idea/
+*.log
+
+# Секреты
+.env
+*.key
+*.json
+*.txt
+*.csv
+MyCommentExplorer.py

@@ -1,5 +1,6 @@
 from CommentExplorer import *
 from ChannelExplorer import channel_name
+from VideoExplorer import *
 from time import sleep
 
 def launcherComments():
