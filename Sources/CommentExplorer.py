@@ -1,6 +1,7 @@
 from googleapiclient.discovery import build
+from collections import Counter
+from pandas import pd
 import re
-from ChannelExplorer import channel_name
 import os
 
 def youtube_api_key(api_key):
@@ -45,12 +46,18 @@ def collect_comments(video_id, search_terms, which_order, youtube):
             comment = item["snippet"]["topLevelComment"]["snippet"]["textDisplay"]
             if any(search_term.lower() in comment.lower() for search_term in search_terms):
                 comments.append(comment)
+            elif not search_terms:
+                comments.append(comment)
+                continue 
 
             if "replies" in item:
                 for reply in item["replies"]["comments"]:
                     reply_comments = reply["snippet"]["textDisplay"]
                     if any(reply_term.lower() in reply_comments.lower() for reply_term in search_terms):
                         comments.append(reply_comments)
+                    elif not search_terms:
+                        comments.append(reply_comments)
+                        continue
 
 
         comments = list(set(comments))
