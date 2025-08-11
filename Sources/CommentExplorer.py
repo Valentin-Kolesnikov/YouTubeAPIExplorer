@@ -1,6 +1,6 @@
 from googleapiclient.discovery import build
-from collections import Counter
-from pandas import pd
+# from collections import Counter
+# import pandas as pd
 import re
 import os
 
@@ -59,7 +59,6 @@ def collect_comments(video_id, search_terms, which_order, youtube):
                         comments.append(reply_comments)
                         continue
 
-
         comments = list(set(comments))
 
         next_page_token = request.get("nextPageToken")
@@ -73,3 +72,13 @@ def numberofcomments(comments, number, channel):
     print(f"Channel: {channel}")
     for i, c in enumerate(comments[:number], 1):
         print(f"\n\n{i}:\n{c}")
+
+# def save_comments(comments, search_terms):
+#     words_comment=[]
+#     for commentas in comments:
+#         cleaned = re.findall(r'\b\w+\b', commentas.lower())
+#         words_comment.extend(cleaned)
+
+#     counter = Counter(search_terms)
+#     for word, freq in counter.most_common(10):
+#         print(f"\n{word}: {freq}")
