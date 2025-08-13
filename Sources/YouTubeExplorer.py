@@ -22,12 +22,14 @@ def launcherComments():
             break
         search_terms.append(terms)
 
+    search_terms = set(search_terms)
+
     sleep(1)
     which_order = input("\nDo you need to sort comments? By relevance - 1; By time - 2: ")
 
     comments = collect_comments(video_id, search_terms, which_order, youtube)
 
-    # save_comments(comments, search_terms)
+    count_keys(comments, search_terms)
 
     sleep(1)
     number = int(input("\nHow many comments do you need?: "))
@@ -35,9 +37,18 @@ def launcherComments():
 
     input("\nPress Enter to exit...")
 
+# def launcherVideos():
+
+
+# def launcherChannels():
+
 if __name__ == "__main__":
     print("What do you need to explore?")
     sleep(1)
     question = int(input("Comments - 1; Videos - 2; Channels - 3: "))
     if question == 1:
         launcherComments()
+    elif question == 2:
+        launcherVideos()
+    elif question == 3:
+        launcherChannels()

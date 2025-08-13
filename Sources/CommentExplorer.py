@@ -73,12 +73,11 @@ def numberofcomments(comments, number, channel):
     for i, c in enumerate(comments[:number], 1):
         print(f"\n\n{i}:\n{c}")
 
-# def save_comments(comments, search_terms):
-#     words_comment=[]
-#     for commentas in comments:
-#         cleaned = re.findall(r'\b\w+\b', commentas.lower())
-#         words_comment.extend(cleaned)
+def count_keys(comments, search_terms):
+    counts = {kw: 0 for kw in search_terms}
+    for comment in comments:
+        for kw in search_terms:
+            counts[kw] += comment.lower().count(kw.lower())
 
-#     counter = Counter(search_terms)
-#     for word, freq in counter.most_common(10):
-#         print(f"\n{word}: {freq}")
+    for kw, count in counts.items():
+        print(f"{kw}: {count}")
