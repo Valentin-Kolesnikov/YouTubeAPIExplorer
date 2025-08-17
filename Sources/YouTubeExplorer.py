@@ -1,7 +1,16 @@
+from googleapiclient.discovery import build
 from CommentExplorer import *
 from ChannelExplorer import channel_name
 from VideoExplorer import *
 from time import sleep
+
+def youtube_api_key(api_key):
+    while True:
+        if len(api_key) == 39:
+            youtube = build('youtube', 'v3', developerKey=api_key)
+            return youtube
+        else:
+            api_key = input("\nTry entering the API key again: ")
 
 def launcherComments():
     sleep(1)
@@ -25,7 +34,7 @@ def launcherComments():
     search_terms = set(search_terms)
 
     sleep(1)
-    which_order = input("\nDo you need to sort comments? By relevance - 1; By time - 2: ")
+    which_order = youtube_which_order()
 
     comments = collect_comments(video_id, search_terms, which_order, youtube)
 
@@ -37,10 +46,14 @@ def launcherComments():
 
     input("\nPress Enter to exit...")
 
-# def launcherVideos():
+def launcherVideos():
+    sleep(1)
+    api_key = input("\nEnter your YouTube API key: ")
+    youtube = youtube_api_key(api_key)
 
+    keywords, region, age, duration, which_order = searching_for_videos()
 
-# def launcherChannels():
+    collect_videos(youtube, keywords, region, age, duration, which_order)
 
 if __name__ == "__main__":
     print("What do you need to explore?")
@@ -50,5 +63,5 @@ if __name__ == "__main__":
         launcherComments()
     elif question == 2:
         launcherVideos()
-    elif question == 3:
-        launcherChannels()
+    # elif question == 3:
+    #     launcherChannels()

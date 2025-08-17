@@ -22,5 +22,7 @@ __pycache__/
 *.json
 *.txt
 *.csv
-MyCommentExplorer.py
-Проба.py
+
+# My Files
+*D.py
+*T.py

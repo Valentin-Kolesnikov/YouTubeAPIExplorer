@@ -1,16 +1,7 @@
-from googleapiclient.discovery import build
 # from collections import Counter
 # import pandas as pd
 import re
 import os
-
-def youtube_api_key(api_key):
-    while True:
-        if len(api_key) == 39:
-            youtube = build('youtube', 'v3', developerKey=api_key)
-            return youtube
-        else:
-            api_key = input("\nTry entering the API key again: ")
 
 def youtube_id_finder(url):
     while True:
@@ -21,9 +12,8 @@ def youtube_id_finder(url):
         else:
             url = input("\nTry entering the url again: ")
 
-def collect_comments(video_id, search_terms, which_order, youtube):
-    comments = []
-    next_page_token = None
+def youtube_which_order():
+    which_order = input("\nDo you need to sort comments? By relevance - 1; By time - 2: ")
 
     if which_order == "1":
         which_order = "relevance"
@@ -31,6 +21,12 @@ def collect_comments(video_id, search_terms, which_order, youtube):
         which_order = "time"
     else:
         which_order = "relevance"
+
+    return which_order
+
+def collect_comments(video_id, search_terms, which_order, youtube):
+    comments = []
+    next_page_token = None
 
     while True:
         request = youtube.commentThreads().list(

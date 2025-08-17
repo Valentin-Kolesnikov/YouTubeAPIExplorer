@@ -54,5 +54,4 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 ## 🔧 What do I plan to make in the future?  
 1. Add exception handling.
 2. The ability to save received comments.
-3. Search for videos and channels.
-4. Fix `Replies` if it is a problem
+3. Search for videos and explore the channels.
