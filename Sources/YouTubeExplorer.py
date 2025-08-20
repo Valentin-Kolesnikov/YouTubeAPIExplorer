@@ -12,11 +12,7 @@ def youtube_api_key(api_key):
         else:
             api_key = input("\nTry entering the API key again: ")
 
-def launcherComments():
-    sleep(1)
-    api_key = input("\nEnter your YouTube API key: ")
-    youtube = youtube_api_key(api_key)
-
+def launcherComments(youtube):
     sleep(1)
     url = input("\nEnter the url: ")     
     video_id = youtube_id_finder(url)
@@ -46,22 +42,27 @@ def launcherComments():
 
     input("\nPress Enter to exit...")
 
-def launcherVideos():
+def launcherVideos(youtube):
     sleep(1)
+    keywords, region, age, duration, which_order = searching_for_videos()
+
+    video_ids, channel_ids = collect_searches(youtube, keywords, region, age, duration, which_order)
+
+    statrequest, channelrequest = collect_stats(youtube, video_ids, channel_ids)
+
+
+    
+
+if __name__ == "__main__":
     api_key = input("\nEnter your YouTube API key: ")
     youtube = youtube_api_key(api_key)
 
-    keywords, region, age, duration, which_order = searching_for_videos()
-
-    collect_videos(youtube, keywords, region, age, duration, which_order)
-
-if __name__ == "__main__":
-    print("What do you need to explore?")
+    print("\nWhat do you need to explore?")
     sleep(1)
     question = int(input("Comments - 1; Videos - 2; Channels - 3: "))
     if question == 1:
-        launcherComments()
+        launcherComments(youtube)
     elif question == 2:
-        launcherVideos()
+        launcherVideos(youtube)
     # elif question == 3:
     #     launcherChannels()
