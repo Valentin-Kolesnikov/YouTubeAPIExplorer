@@ -3,6 +3,7 @@ from CommentExplorer import *
 from ChannelExplorer import channel_name
 from VideoExplorer import *
 from time import sleep
+import os
 
 def youtube_api_key(api_key):
     while True:
@@ -38,22 +39,28 @@ def launcherComments(youtube):
 
     sleep(1)
     number = int(input("\nHow many comments do you need?: "))
+    os.system('cls')
     numberofcomments(comments, number, channel)
 
     input("\nPress Enter to exit...")
 
 def launcherVideos(youtube):
     sleep(1)
-    keywords, region, age, duration, which_order = searching_for_videos()
+    keywords, region, age, duration = searching_for_videos()
+    sleep(1)
+    os.system('cls')
 
-    video_ids, channel_ids = collect_searches(youtube, keywords, region, age, duration, which_order)
+    video_ids, channel_ids = collect_searches(youtube, keywords, region, age, duration)
 
     results = ryd(video_ids)
 
     statrequest, dict_channels = collect_stats(youtube, video_ids, channel_ids)
 
     output_videos(results, statrequest, dict_channels)
+
+    input("\nPress Enter to exit...")
     
+
 
 if __name__ == "__main__":
     api_key = input("\nEnter your YouTube API key: ")

@@ -49,17 +49,7 @@ def searching_for_videos():
 
     region = input("\nWhat region would you like? (Enter as US, RU, UK, etc): ")
 
-    which_orderQ = input("\nDo you need a filter?(Yes, No): ")
-
-    if which_orderQ.lower() == "yes":
-        which_order = input(
-            '\nWhich fulter (enter it literally as written):' \
-            ' date, rating, relevance, title, popularity: '
-            )
-        if which_order == "popularity":
-            which_order = "viewCount"
-    else:
-        which_order = None
+   
 
     
     date = input("\nDo you need to enter the certain time?(Yes, No): ")
@@ -79,10 +69,10 @@ def searching_for_videos():
     else:
         duration = None
 
-    return keywords, region.upper(), age, duration, which_order
+    return keywords, region.upper(), age, duration
 
 
-def collect_searches(youtube, keywords, region, age, duration, which_order):
+def collect_searches(youtube, keywords, region, age, duration):
     request = youtube.search().list(
         q=keywords,
         regionCode=region,
@@ -91,7 +81,6 @@ def collect_searches(youtube, keywords, region, age, duration, which_order):
         part="snippet",
         type="video",
         maxResults=5,
-        order=which_order,
     ).execute()
 
     video_ids = []
@@ -128,23 +117,21 @@ def collect_stats(youtube, video_ids, channel_ids):
     ).execute()
 
     channelrequest = youtube.channels().list(
-        part="snippet,statistics",
+        part="snippet",
         id=",".join(channel_ids)
     ).execute()
 
     dict_channels = { 
         ch["id"]: {
-            "title": ch["snippet"]["title"],
-            "subs": ch["statistics"].get("subscriberCount", "No"),
-            "views": ch["statistics"].get("viewCount", "No"),
-            "videoCount": ch["statistics"].get("videoCount", "No")
+            "title": ch["snippet"]["title"]
         }
         for ch in channelrequest["items"]
     }
 
     return statrequest, dict_channels
     
-def output_videos(results, statrequest, dict_channels, channel_ids):
+def output_videos(results, statrequest, dict_channels):
+    number = 1
     for item in statrequest["items"]:
         title = item["snippet"]["title"]
         video_id = item["id"]
@@ -160,13 +147,13 @@ def output_videos(results, statrequest, dict_channels, channel_ids):
         channel_id = item["snippet"]["channelId"]
         channel_info = dict_channels.get(channel_id, {})
 
+        number += 1
+
         print(
+            f"{number}.\n"
             f"{title}\n"
             f"https://www.youtube.com/watch?v={video_id}\n"
             f"{views} views; {likes} likes; {dislikes} dislikes; {comments} comments\n"
             f"{formatted_date}\n"
-            f"{channel_info.get("title", "N\A")}\n"
-            f"Channel Link: https://www.youtube.com/channel/{channel_id}\n"
-            f"")
-        
-        
+            f"{channel_info.get("title", "N/A")}\n"
+            f"Channel Link: https://www.youtube.com/channel/{channel_id}\n")

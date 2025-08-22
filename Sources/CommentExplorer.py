@@ -1,7 +1,6 @@
 # from collections import Counter
 # import pandas as pd
 import re
-import os
 
 def youtube_id_finder(url):
     while True:
@@ -64,7 +63,6 @@ def collect_comments(video_id, search_terms, which_order, youtube):
     return comments
 
 def numberofcomments(comments, number, channel):
-    os.system('cls')
     print(f"Channel: {channel}")
     for i, c in enumerate(comments[:number], 1):
         print(f"\n\n{i}:\n{c}")
