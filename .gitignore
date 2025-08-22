@@ -7,8 +7,8 @@ __pycache__/
 
 # PyInstaller
 *.spec
-/build/
-/dist/
+build/
+dist/
 *.exe
 
 # IDE / редакторы
@@ -26,3 +26,5 @@ __pycache__/
 # My Files
 *D.py
 *T.py
+*.drawio
+*tempCodeRunnerFile.py
