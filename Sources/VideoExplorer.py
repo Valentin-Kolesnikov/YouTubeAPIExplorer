@@ -1,3 +1,6 @@
+import requests
+from datetime import datetime
+
 def age_calendar():
     plus_year = False
     year = input("\nEnter the year: ")
@@ -40,6 +43,7 @@ def age_calendar():
 
     return year, month, day
 
+
 def searching_for_videos():
     keywords = input("\nEnter a request on YouTube: ")
 
@@ -77,6 +81,7 @@ def searching_for_videos():
 
     return keywords, region.upper(), age, duration, which_order
 
+
 def collect_searches(youtube, keywords, region, age, duration, which_order):
     request = youtube.search().list(
         q=keywords,
@@ -102,6 +107,20 @@ def collect_searches(youtube, keywords, region, age, duration, which_order):
     return video_ids, channel_ids
 
 
+def ryd(video_ids):
+    results = {}
+    for vid in video_ids:
+        ryd_url = f"https://returnyoutubedislikeapi.com/votes?videoId={vid}"
+        ryd_response = requests.get(ryd_url)
+        if ryd_response.status_code == 200:
+            ryd_data = ryd_response.json()
+            results[vid] = ryd_data
+        else:
+            results[vid] = {"error": "N/A"}
+
+    return results
+
+
 def collect_stats(youtube, video_ids, channel_ids):
     statrequest = youtube.videos().list(
         part="snippet,statistics",
@@ -113,4 +132,41 @@ def collect_stats(youtube, video_ids, channel_ids):
         id=",".join(channel_ids)
     ).execute()
 
-    return statrequest, channelrequest
+    dict_channels = { 
+        ch["id"]: {
+            "title": ch["snippet"]["title"],
+            "subs": ch["statistics"].get("subscriberCount", "No"),
+            "views": ch["statistics"].get("viewCount", "No"),
+            "videoCount": ch["statistics"].get("videoCount", "No")
+        }
+        for ch in channelrequest["items"]
+    }
+
+    return statrequest, dict_channels
+    
+def output_videos(results, statrequest, dict_channels, channel_ids):
+    for item in statrequest["items"]:
+        title = item["snippet"]["title"]
+        video_id = item["id"]
+        published_at = item["snippet"]["publishedAt"]
+        dt = datetime.fromisoformat(published_at.replace("Z", "+00:00"))
+        formatted_date = dt.strftime("%d.%m.%Y")
+
+        likes = results.get(video_id, {}).get("likes", "No")
+        dislikes = results.get(video_id, {}).get("dislikes", "No")
+        views = results.get(video_id, {}).get("viewCount", "No")
+        comments = item["statistics"].get("commentCount", "No")
+
+        channel_id = item["snippet"]["channelId"]
+        channel_info = dict_channels.get(channel_id, {})
+
+        print(
+            f"{title}\n"
+            f"https://www.youtube.com/watch?v={video_id}\n"
+            f"{views} views; {likes} likes; {dislikes} dislikes; {comments} comments\n"
+            f"{formatted_date}\n"
+            f"{channel_info.get("title", "N\A")}\n"
+            f"Channel Link: https://www.youtube.com/channel/{channel_id}\n"
+            f"")
+        
+        

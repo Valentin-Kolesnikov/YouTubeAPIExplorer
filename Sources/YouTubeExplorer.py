@@ -48,9 +48,11 @@ def launcherVideos(youtube):
 
     video_ids, channel_ids = collect_searches(youtube, keywords, region, age, duration, which_order)
 
-    statrequest, channelrequest = collect_stats(youtube, video_ids, channel_ids)
+    results = ryd(video_ids)
 
+    statrequest, dict_channels = collect_stats(youtube, video_ids, channel_ids)
 
+    output_videos(results, statrequest, dict_channels)
     
 
 if __name__ == "__main__":
