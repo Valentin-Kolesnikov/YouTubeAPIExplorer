@@ -48,9 +48,6 @@ def searching_for_videos():
     keywords = input("\nEnter a request on YouTube: ")
 
     region = input("\nWhat region would you like? (Enter as US, RU, UK, etc): ")
-
-   
-
     
     date = input("\nDo you need to enter the certain time?(Yes, No): ")
 
@@ -80,7 +77,7 @@ def collect_searches(youtube, keywords, region, age, duration):
         videoDuration=duration,
         part="snippet",
         type="video",
-        maxResults=5,
+        maxResults=25,
     ).execute()
 
     video_ids = []
