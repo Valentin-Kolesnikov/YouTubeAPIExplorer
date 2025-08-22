@@ -73,7 +73,7 @@ def launcherVideos(youtube):
 
     input("\nPress Enter to exit...")
     
-# def launcherChannels(youtube):
+def launcherChannels(youtube):
 
 if __name__ == "__main__":
     api_key = input("\nEnter your YouTube API key: ")
@@ -86,5 +86,5 @@ if __name__ == "__main__":
         launcherComments(youtube)
     elif question == 2:
         launcherVideos(youtube)
-    # elif question == 3:
-    #     launcherChannels(youtube)
+    elif question == 3:
+        launcherChannels(youtube)
