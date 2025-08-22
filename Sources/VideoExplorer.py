@@ -131,7 +131,7 @@ def collect_stats(youtube, video_ids, channel_ids):
     return statrequest, dict_channels
     
 def output_videos(results, statrequest, dict_channels):
-    number = 1
+    number = 0
     for item in statrequest["items"]:
         title = item["snippet"]["title"]
         video_id = item["id"]
