@@ -1,8 +1,10 @@
 import requests
 from datetime import datetime
+from time import sleep
 
 def age_calendar():
     plus_year = False
+    sleep(1)
     year = input("\nEnter the year: ")
 
     if year.isdigit() and 2006 <= int(year) <= 2025:
@@ -12,6 +14,7 @@ def age_calendar():
         year = str(2006)
 
 
+    sleep(1)
     month = input("\nEnter the month numerously: ")
 
     if month.isdigit() and int(month) < 13 and int(month) != 0:
@@ -20,7 +23,8 @@ def age_calendar():
     else:
         month = str(1).zfill(2)
 
-                    
+    
+    sleep(1)
     day = input("\nEnter the day numerously: ")
 
     if day.isdigit() and int(day) != 0 and int(day) < 32:
@@ -45,10 +49,7 @@ def age_calendar():
 
 
 def searching_for_videos():
-    keywords = input("\nEnter a request on YouTube: ")
-
-    region = input("\nWhat region would you like? (Enter as US, RU, UK, etc): ")
-    
+    sleep(1)
     date = input("\nDo you need to enter the certain time?(Yes, No): ")
 
     if date.lower() == "yes":
@@ -58,7 +59,8 @@ def searching_for_videos():
     else:
         age = None
         
-    
+
+    sleep(1)
     durationQ = input("\nDo you need a duration of video(Yes, No): ")
     if durationQ == "yes":
         duration = input('\nEnter it literally: "short", "medium", "long": ')
@@ -66,10 +68,10 @@ def searching_for_videos():
     else:
         duration = None
 
-    return keywords, region.upper(), age, duration
+    return age, duration
 
 
-def collect_searches(youtube, keywords, region, age, duration):
+def collect_searches(youtube, keywords, region, age, duration, maximum):
     request = youtube.search().list(
         q=keywords,
         regionCode=region,
@@ -77,7 +79,7 @@ def collect_searches(youtube, keywords, region, age, duration):
         videoDuration=duration,
         part="snippet",
         type="video",
-        maxResults=25,
+        maxResults=maximum,
     ).execute()
 
     video_ids = []

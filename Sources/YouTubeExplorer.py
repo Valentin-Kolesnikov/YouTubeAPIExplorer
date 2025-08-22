@@ -46,11 +46,24 @@ def launcherComments(youtube):
 
 def launcherVideos(youtube):
     sleep(1)
-    keywords, region, age, duration = searching_for_videos()
+    keywords = input("\nEnter a request on YouTube: ")
+
     sleep(1)
+    region = input("\nWhat region would you like? (Enter as US, RU, UK, etc): ")
+    region.upper()
+
+    age, duration = searching_for_videos()
+
+    sleep(1)
+    maximum = int(input("\nHow much do you want to receive videos?: "))
+    if maximum > 51:
+        maximum = 50
+    elif maximum < 0:
+        maximum = 5
+    sleep(2)
     os.system('cls')
 
-    video_ids, channel_ids = collect_searches(youtube, keywords, region, age, duration)
+    video_ids, channel_ids = collect_searches(youtube, keywords, region, age, duration, maximum)
 
     results = ryd(video_ids)
 
