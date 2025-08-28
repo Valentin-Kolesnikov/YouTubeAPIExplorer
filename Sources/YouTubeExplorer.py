@@ -1,17 +1,9 @@
-from googleapiclient.discovery import build
 from CommentExplorer import *
 from ChannelExplorer import channel_name
 from VideoExplorer import *
 from time import sleep
+from Key import youtube_api_key
 import os
-
-def youtube_api_key(api_key):
-    while True:
-        if len(api_key) == 39:
-            youtube = build('youtube', 'v3', developerKey=api_key)
-            return youtube
-        else:
-            api_key = input("\nTry entering the API key again: ")
 
 def launcherComments(youtube):
     sleep(1)
@@ -75,11 +67,12 @@ def launcherVideos(youtube):
     
 def launcherChannels(youtube):
 
-if __name__ == "__main__":
-    api_key = input("\nEnter your YouTube API key: ")
-    youtube = youtube_api_key(api_key)
+    input("\nPress Enter to exit...")
 
-    print("\nWhat do you need to explore?")
+if __name__ == "__main__":
+    youtube, api_key = youtube_api_key()
+
+    print("What do you need to explore?")
     sleep(1)
     question = int(input("Comments - 1; Videos - 2; Channels - 3: "))
     if question == 1:
