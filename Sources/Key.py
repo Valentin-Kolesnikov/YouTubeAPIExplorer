@@ -28,4 +28,4 @@ def youtube_api_key():
             api_key = input("\nThis is not the YouTube API key. Try entering the API key again: ")
         memory.save_key(api_key)
     youtube = build('youtube', 'v3', developerKey=api_key)
-    return api_key, youtube
+    return youtube, api_key
