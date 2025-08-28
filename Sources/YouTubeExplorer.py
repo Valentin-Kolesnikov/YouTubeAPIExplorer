@@ -71,8 +71,10 @@ def launcherChannels(youtube):
 
 if __name__ == "__main__":
     youtube, api_key = youtube_api_key()
-
-    print("What do you need to explore?")
+    os.system('cls')
+    print("Key is accepted!")
+    sleep(1)
+    print("\nWhat do you need to explore?")
     sleep(1)
     question = int(input("Comments - 1; Videos - 2; Channels - 3: "))
     if question == 1:
