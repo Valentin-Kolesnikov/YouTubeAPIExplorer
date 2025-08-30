@@ -7,17 +7,17 @@ if getattr(sys, "frozen", False):
 else:
     app_folder = os.path.dirname(__file__)
 
-key_file = os.path.join(app_folder, "Key.txt")
+key_file = os.path.join(app_folder, "Key.bin")
 
 class memory():
     def save_key(api_key):
-        with open(key_file, "w", encoding="utf-8") as f:
-            f.write(api_key)
+        with open(key_file, "wb") as f:
+            f.write(api_key.encode("utf-8"))
 
     def load_key():
         if os.path.exists(key_file):
-            with open(key_file, "r", encoding="utf=8") as f:
-                return f.read().strip()
+            with open(key_file, "rb") as f:
+                return f.read().decode("utf-8")
         return None
 
 def youtube_api_key():

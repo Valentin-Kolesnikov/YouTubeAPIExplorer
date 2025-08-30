@@ -4,10 +4,15 @@ from time import sleep
 
 def age_calendar():
     plus_year = False
+    now = datetime.now()
     sleep(1)
     year = input("\nEnter the year: ")
 
-    if year.isdigit() and 2006 <= int(year) <= 2025:
+    if year.isdigit() and 2006 <= int(year) <= now.year:
+        if int(year) % 4 == 0 and int(year) % 100 != 0 or int(year) % 400 == 0:
+            plus_year = True
+    elif year.isdigit() and 6 <= int(year) <= (now.year - 2000):
+        year = str(20) + str(year.zfill(2))
         if int(year) % 4 == 0 and int(year) % 100 != 0 or int(year) % 400 == 0:
             plus_year = True
     else:
@@ -50,22 +55,22 @@ def age_calendar():
 
 def searching_for_videos():
     sleep(1)
-    date = input("\nDo you need to enter the certain time?(Yes, No): ")
+    date = input("\nDo you need to enter the certain time?(y/n): ")
 
-    if date.lower() == "yes":
+    if date.lower() == "y":
         year, month, day = age_calendar()
 
         age = (f"{year}-{month}-{day}T00:00:00Z")
-    else:
+    elif date.lower() == "n":
         age = None
         
 
     sleep(1)
-    durationQ = input("\nDo you need a duration of video(Yes, No): ")
-    if durationQ == "yes":
+    durationQ = input("\nDo you need a duration of video(y/n): ")
+    if durationQ == "y":
         duration = input('\nEnter it literally: "short", "medium", "long": ')
         duration.lower()
-    else:
+    elif durationQ == "n":
         duration = None
 
     return age, duration
