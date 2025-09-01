@@ -1,3 +1,12 @@
+<p align="center">
+   <img>
+</p>
+<p align="center">
+   <img src="https://img.shields.io/badge/Code_Editor-VS%20Code-blue" alt="Code Editor VS Code">
+   <img src="https://img.shields.io/badge/Version-Pre--Release-red" alt="Version Pre-Release">
+   <img src="https://img.shields.io/badge/License-MIT-green" alt="License MIT">
+</p>
+
 # YouTube Explorer (Console Beta vesion)  
 
 YouTube Explorer is an unofficial tool for searching, filtering, and displaying comments from YouTube videos by keywords using the YouTube Data API v3.  
