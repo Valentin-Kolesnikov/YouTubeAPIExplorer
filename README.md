@@ -1,5 +1,5 @@
 <p align="center">
-   <img>
+   <img src="https://i.ibb.co/8gsGZ9x9/20250903-0334-remix-01k46ft3hhf4dv826ckv8nnxnx.png" alt="YouTube Explorer">
 </p>
 <p align="center">
    <img src="https://img.shields.io/badge/Code_Editor-VS%20Code-blue" alt="Code Editor VS Code">
@@ -7,7 +7,7 @@
    <img src="https://img.shields.io/badge/License-MIT-green" alt="License MIT">
 </p>
 
-# YouTube Explorer (Console Beta vesion)  
+# (Console Beta vesion)  
 
 YouTube Explorer is an unofficial tool for searching, filtering, and displaying comments from YouTube videos by keywords using the YouTube Data API v3.  
 
