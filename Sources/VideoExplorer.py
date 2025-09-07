@@ -1,6 +1,9 @@
-import requests
 from datetime import datetime
 from time import sleep
+# from colorist import effect_blink, red
+from googleapiclient.errors import HttpError
+import asyncio
+import aiohttp
 
 def age_calendar():
     plus_year = False
@@ -54,85 +57,135 @@ def age_calendar():
 
 
 def searching_for_videos():
-    sleep(1)
+    sleep(0.6)
     date = input("\nDo you need to enter the certain time?(y/n): ")
 
     if date.lower() == "y":
         year, month, day = age_calendar()
 
         age = (f"{year}-{month}-{day}T00:00:00Z")
-    elif date.lower() == "n":
+    else:
         age = None
         
 
-    sleep(1)
+    sleep(0.6)
     durationQ = input("\nDo you need a duration of video(y/n): ")
     if durationQ == "y":
         duration = input('\nEnter it literally: "short", "medium", "long": ')
+        while True:
+            if duration in ["short", "medium", "long"]:
+                break
+            else:
+                duration = input("\nEnter it again: ")
         duration.lower()
-    elif durationQ == "n":
+    else:
         duration = None
 
     return age, duration
 
 
 def collect_searches(youtube, keywords, region, age, duration, maximum):
-    request = youtube.search().list(
-        q=keywords,
-        regionCode=region,
-        publishedAfter=age,
-        videoDuration=duration,
-        part="snippet",
-        type="video",
-        maxResults=maximum,
-    ).execute()
+    try:
+        request = youtube.search().list(
+            q=keywords,
+            regionCode=region,
+            publishedAfter=age,
+            videoDuration=duration,
+            part="snippet",
+            type="video",
+            maxResults=maximum,
+        ).execute()
 
-    video_ids = []
-    for item in request["items"]:
-        videos = item["id"]["videoId"]
-        video_ids.append(videos)
+        video_ids = []
+        channel_ids = []
+
+        for item in request["items"]:
+            videos = item["id"]["videoId"]
+            video_ids.append(videos)
+
+            channels = item["snippet"]["channelId"]
+            channel_ids.append(channels)
+
+        return video_ids, channel_ids, False
     
-    channel_ids = []
-    for item in request["items"]:
-        channels = item["snippet"]["channelId"]
-        channel_ids.append(channels)
+    except HttpError as exc:
+        status = exc.resp.status
 
-    return video_ids, channel_ids
+        if status == 400:
+            print(f"\n\u001b[31mError {status}: Bad Request. There is some issues with Google requests.\u001b[0m")
 
+        elif status == 403:
+            print(f"\n\u001b[31mError {status}: Forbidden. Probably, you exceeded your YouTube API quota.\u001b[0m")
 
-def ryd(video_ids):
-    results = {}
-    for vid in video_ids:
-        ryd_url = f"https://returnyoutubedislikeapi.com/votes?videoId={vid}"
-        ryd_response = requests.get(ryd_url)
-        if ryd_response.status_code == 200:
-            ryd_data = ryd_response.json()
-            results[vid] = ryd_data
+        elif status == 404:
+            print(f"\n\u001b[31mError {status}: Not Found. Probably, the non-existent video was found.\u001b[0m")
+
         else:
-            results[vid] = {"error": "N/A"}
+            print(f"\n\u001b[31mUnexpected HTTP error: {status}\u001b[0m")
+        
+        input("\nPress Enter to return...")
+        
+        return {}, {}, True
 
+
+async def fetch_ryd(session, vid):
+    ryd_url = f"https://returnyoutubedislikeapi.com/votes?videoId={vid}"
+    async with session.get(ryd_url) as dislike:
+        if dislike.status == 200:
+            return vid, await dislike.json()
+        else:
+            return vid, {"error": "N/A"}
+        
+async def ryd(video_ids):
+    results = {}
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_ryd(session, vid) for vid in video_ids]
+        responses = await asyncio.gather(*tasks)
+        for vid, data in responses:
+            results[vid] = data
     return results
 
 
 def collect_stats(youtube, video_ids, channel_ids):
-    statrequest = youtube.videos().list(
-        part="snippet,statistics",
-        id=",".join(video_ids)
-    ).execute()
+    try:
+        statrequest = youtube.videos().list(
+            part="snippet,statistics",
+            id=",".join(video_ids)
+        ).execute()
 
-    channelrequest = youtube.channels().list(
-        part="snippet",
-        id=",".join(channel_ids)
-    ).execute()
+        channelrequest = youtube.channels().list(
+            part="snippet",
+            id=",".join(channel_ids)
+        ).execute()
 
-    dict_channels = { 
-        ch["id"]: {
-            "title": ch["snippet"]["title"]
+        dict_channels = { 
+            ch["id"]: {
+                "title": ch["snippet"]["title"]
+            }
+            for ch in channelrequest["items"]
         }
-        for ch in channelrequest["items"]
-    }
+        
+        return statrequest, dict_channels, False
+    
+    except HttpError as exc:
+        status = exc.resp.status
 
-    return statrequest, dict_channels
+        if status == 400:
+            print(f"\n\u001b[31mError {status}: Bad Request. There is some issues with Google requests.\u001b[0m")
+
+        elif status == 403:
+            print(f"\n\u001b[31mError {status}: Forbidden. Probably, you exceeded your YouTube API quota.\u001b[0m")
+
+        elif status == 404:
+            print(f"\n\u001b[31mError {status}: Not Found. Probably, the non-existent video was found.\u001b[0m")
+
+        else:
+            print(f"\n\u001b[31mUnexpected HTTP error: {status}\u001b[0m")
+        
+        input("\nPress Enter to return...")
+
+        return {}, {}, True
+    
     
 def output_videos(results, statrequest, dict_channels):
     number = 0
@@ -159,5 +212,5 @@ def output_videos(results, statrequest, dict_channels):
             f"https://www.youtube.com/watch?v={video_id}\n"
             f"{views} views; {likes} likes; {dislikes} dislikes; {comments} comments\n"
             f"{formatted_date}\n"
-            f"{channel_info.get("title", "N/A")}\n"
+            f"{channel_info.get('title', 'N/A')}\n"
             f"Channel Link: https://www.youtube.com/channel/{channel_id}\n")
