@@ -13,7 +13,7 @@ YouTube Explorer is an unofficial tool for searching, filtering, and displaying 
 
 ## Important clarification!!!  
 
-The .exe file is in releases. This `.exe` file does not have viruses. It was created for convenience. I made this file thanks to `python -m PyInstaller --onefile ...`. If you do not trust the `.exe` file, I recommend you to use the `.py` file in `Sources`.
+The .exe file is in releases. This `.exe` file does not have viruses. It was created for convenience. I made this file thanks to `python -m PyInstaller --strip --icon="../Icon/IconYE.ico" YouTubeExplorer.py`. If you do not trust the `.exe` file, I recommend you to use the `.py` file in `Sources`.
 
 ## Table of Contents  
 
@@ -29,12 +29,18 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 2. The video URL.
 3. Your desire to use **YouTube Explorer**.
 
+## `Key.py` provides:
+- Creating the `Key.bin` file in the folder.
+
+##
+
 ## 📌 The Comment Explorer provides  
 - To receive the list of comments from YouTube videos in the console.
 - To filter comments by keyword.
 - To sort `by time` or `by relevance`.
 - to limit the number of output results.
 - To find out the channel's name where the video is hosted.
+- Uninterrupted operation of this extention.
 
 ## The Video Explorer provides:
 - Search videos by your prompt.
@@ -42,6 +48,8 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 - You can enter certain date of videos' releases; you can also enter a duration of videos.
 - After exploring videos you should enter how many videos you want to receive.
 - For one video you will receive information block. The title of the video, a link, views, likes, dislikes, amount of comments. Also the date, the channel and its YouTube link.
+- Uninterrupted operation of this extention.
+
 
 ## ⚙️ Functionality
 - **The API key** from Google Cloud Console (YouTube Data API v3) is being analyzed. If there is an error, it will ask you to enter it again.
