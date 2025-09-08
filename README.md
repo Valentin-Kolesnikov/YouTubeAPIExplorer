@@ -17,9 +17,12 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 
 ## Table of Contents  
 
-- [What do you have to use YouTube Explorer?](#what-do-you-have-to-use-youtube-explorer)
-- [Now the program provides:](#-now-the-program-provides)
-- [Functionality](#%EF%B8%8F-functionality)
+- [What do you need to use YouTube Explorer?](#what-do-you-need-to-use-youtube-explorer)
+- [Key Explorer provides:](#key-explorer-provides)
+- [Quota Explorer provides:](#quota-explorer-provides)
+- [Comment Explorer provides:](#-comment-explorer-provides) 
+- [Video Explorer provides:](#video-explorer-provides)
+- [Functionality:](#%EF%B8%8F-functionality)
 - [How to get the YouTube API key?](#-how-to-get-the-youtube-api-key)
 - [What do I plan to make in the future?](#-what-do-i-plan-to-make-in-the-future)
 
@@ -33,7 +36,7 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 - Creating the `Key.bin` file in the folder.
 - After creating `Key.bin` you do not need to write the key again.
 
-## TestQuota provides:
+## Quota Explorer provides:
 - Exploring your accessibility to the YouTube API quota. 
 - If you exeed the quota, the program ask you to leave it.
 
@@ -44,6 +47,8 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 - to limit the number of output results.
 - To find out the channel's name where the video is hosted.
 - Uninterrupted operation of this extention.
+- There are messages if errors will be. The program will not stop.
+- If an exception is Error: 403, Comment Explorer inform why this error occured.
 
 ## Video Explorer provides:
 - Search videos by your prompt.
@@ -52,9 +57,9 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 - After exploring videos you should enter how many videos you want to receive.
 - For one video you will receive information block. The title of the video, a link, views, likes, dislikes, amount of comments. Also the date, the channel and its YouTube link.
 - Uninterrupted operation of this extention.
+- There are messages if errors will be. The program will not stop.
 
-
-## ⚙️ Functionality
+## ⚙️ Functionality:
 - **The API key** from Google Cloud Console (YouTube Data API v3) is being analyzed. If there is an error, it will ask you to enter it again.
 - the `video id`, which is required for the YouTube Data API, is extracted from the **YouTube video URL**.
 - **Keywords (optional)** — to filter comments. YouTube Explorer will search for comments on these keywords. YouTube Data API will not help it.
@@ -79,6 +84,5 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 8. The end of the way! Just copy your API key and paste it into the Windows notepad or somewhere else.
 
 ## 🔧 What do I plan to make in the future?  
-1. Add exception handling.
-2. The ability to save received comments.
-3. Search for videos and explore the channels.
+1. The ability to save received comments and videos.
+2. Explore the channels.
