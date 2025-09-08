@@ -29,12 +29,15 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 2. The video URL.
 3. Your desire to use **YouTube Explorer**.
 
-## `Key.py` provides:
+## Key Explorer provides:
 - Creating the `Key.bin` file in the folder.
+- After creating `Key.bin` you do not need to write the key again.
 
-##
+## TestQuota provides:
+- Exploring your accessibility to the YouTube API quota. 
+- If you exeed the quota, the program ask you to leave it.
 
-## 📌 The Comment Explorer provides  
+## 📌 Comment Explorer provides  
 - To receive the list of comments from YouTube videos in the console.
 - To filter comments by keyword.
 - To sort `by time` or `by relevance`.
@@ -42,7 +45,7 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 - To find out the channel's name where the video is hosted.
 - Uninterrupted operation of this extention.
 
-## The Video Explorer provides:
+## Video Explorer provides:
 - Search videos by your prompt.
 - You must enter your region.
 - You can enter certain date of videos' releases; you can also enter a duration of videos.
