@@ -1,5 +1,3 @@
-# from collections import Counter
-# import pandas as pd
 from googleapiclient.errors import HttpError
 import re
 import requests
@@ -94,7 +92,6 @@ def collect_comments(video_id, search_terms, which_order, youtube):
         return comments, False
     
     except HttpError as exc:
-        
         status = exc.resp.status
 
         if status == 400:
