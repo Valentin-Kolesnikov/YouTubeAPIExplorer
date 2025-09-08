@@ -1,22 +1,15 @@
 from CommentExplorer import *
-# from ChannelExplorer import *
 from VideoExplorer import *
-from Key import youtube_api_key
-from TestQuota import test_quota
+from KeyExplorer import youtube_api_key
+from QuotaExplorer import test_quota
 from time import sleep
 import asyncio
-
 import os
 
 def launcherComments(youtube):
     sleep(0.6)
     url = input("\nEnter the url: ")     
     video_id = youtube_id_finder(url)
-                                                
-    channel, exc = channel_name(video_id, api_key)
-    if exc:
-        os.system('cls')
-        return
 
     sleep(0.6)
     search_terms = []
@@ -35,7 +28,12 @@ def launcherComments(youtube):
     if exc:
         os.system('cls')
         return
-
+    
+    channel, exc = channel_name(video_id, api_key)
+    if exc:
+        os.system('cls')
+        return
+    
     count_keys(comments, search_terms)
 
     sleep(0.6)
