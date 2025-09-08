@@ -37,7 +37,7 @@ The .exe file is in releases. This `.exe` file does not have viruses. It was cre
 - Exploring your accessibility to the YouTube API quota. 
 - If you exeed the quota, the program ask you to leave it.
 
-## 📌 Comment Explorer provides  
+## 📌 Comment Explorer provides: 
 - To receive the list of comments from YouTube videos in the console.
 - To filter comments by keyword.
 - To sort `by time` or `by relevance`.
