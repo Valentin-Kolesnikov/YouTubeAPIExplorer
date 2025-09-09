@@ -7,7 +7,7 @@
    <img src="https://img.shields.io/badge/License-MIT-green" alt="License MIT">
 </p>
 
-# (Console Beta vesion)  
+# (Console Beta version)  
 
 YouTube Explorer is an unofficial tool for searching, filtering, and displaying comments from YouTube videos by keywords using the YouTube Data API v3.  
 
