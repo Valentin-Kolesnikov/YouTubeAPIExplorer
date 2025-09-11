@@ -131,5 +131,5 @@ def count_keys(comments, search_terms):
     
 def numberofcomments(comments, number, channel):
     print(f"Channel: {channel}")
-    for i, c in enumerate(comments[:number], 1):
+    for i, c in enumerate(comments[:int(number)], 1):
         print(f"\n\n{i}:\n{c}")
