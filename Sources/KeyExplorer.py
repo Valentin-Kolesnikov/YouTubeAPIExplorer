@@ -30,3 +30,10 @@ def youtube_api_key():
     youtube = build('youtube', 'v3', developerKey=api_key)
     
     return youtube, api_key
+
+def window_title(title):
+    if os.name == "nt":
+        os.system(f"title {title}")
+    else:
+        sys.stdout.write(f"\33]0;{title}\a")
+        sys.stdout.flush()
