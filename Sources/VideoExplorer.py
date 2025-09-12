@@ -1,11 +1,10 @@
 from datetime import datetime
 from time import sleep
-# from colorist import effect_blink, red
 from googleapiclient.errors import HttpError
 import asyncio
 import aiohttp
 
-def age_calendar():
+def age_calendar(dateBefore=False, dateAfter=False):
     plus_year = False
     now = datetime.now()
     sleep(1)
@@ -18,25 +17,31 @@ def age_calendar():
         year = str(20) + str(year.zfill(2))
         if int(year) % 4 == 0 and int(year) % 100 != 0 or int(year) % 400 == 0:
             plus_year = True
-    else:
-        year = str(2006)
-
+    elif dateAfter:
+        year = 2005
+    elif dateBefore:
+        year = now.year
 
     sleep(1)
     month = input("\nEnter the month numerously: ")
 
     if month.isdigit() and int(month) < 13 and int(month) != 0:
-        if 0 < int(month) <= 9:
-            month = str(month).zfill(2)
-    else:
+        if int(year) == now.year and int(month) > now.month:
+            month = str(now.month).zfill(2)
+        month = str(month).zfill(2)
+    elif dateAfter:
         month = str(1).zfill(2)
+    elif dateBefore:
+        month = str(now.month).zfill(2)
 
-    
     sleep(1)
     day = input("\nEnter the day numerously: ")
 
     if day.isdigit() and int(day) != 0 and int(day) < 32:
-        if month in ['01', '03', '05', '07', '08', '10', '12']:
+        if int(year) == now.year and int(month) == now.month and int(day) > now.day:
+            day = str(now.day).zfill(2)
+
+        elif month in ['01', '03', '05', '07', '08', '10', '12']:
             day = str(day).zfill(2)
 
         elif int(day) < 31 and month in ['04', '06', '09', '11']:
@@ -50,46 +55,111 @@ def age_calendar():
         
         else:
             day = str(1).zfill(2)
-    else:
+    
+    elif dateAfter:
         day = str(1).zfill(2)
-
+    elif dateBefore:
+        day = now.day
+        
     return year, month, day
 
 
 def searching_for_videos():
     sleep(0.6)
-    date = input("\nDo you need to enter the certain time?(y/n): ")
+    keywords = input("\nEnter a request on YouTube: ")
 
-    if date.lower() == "y":
-        year, month, day = age_calendar()
+    sleep(0.6)
+    region = input("\nWhat region would you like? (Enter as US, RU, UK, etc): ")
+    while True:
+        if len(region) == 2 and region.isalpha():
+            break
+        else:
+            region = input("\nEnter again: ")
+    region.upper()
 
-        age = (f"{year}-{month}-{day}T00:00:00Z")
+    sleep(0.6)
+    filterQ = input("\nDo you need to sort the video?(y/n): ")
+    if filterQ == "y":
+        print("\nRelevance - default; date - sort by upload date; viewCount - sort from highest to lowest number of views; " \
+        "rating - sort from highest to lowest rating; title - sort alphabetically by title")
+
+        which_order = input("\nEnter: relevance/date/viewCount/rating/title: ")
+        while True:
+            if which_order in ["relevance", "date", "viewCount", "rating", "title"]:
+                break
+            else:
+                which_order = input("\nEnter again: ")
+
+        dimension = input("\nWhat dimension do you need? Enter: 2d/3d/any: ")
+        while True:
+            if dimension in ["2d", "3d", "any"]:
+                break
+            else:
+                dimension = input("\nEnter again: ")
+        dimension.lower()
     else:
-        age = None
+        which_order = "relevance"
+        dimension = "any"
+
+    sleep(0.6)
+    dateBefore = input("\nDo you need videos before some time?(y/n): ")
+    if dateBefore.lower() == "y":
+        yearB, monthB, dayB = age_calendar(dateBefore=True)
+
+        ageBefore = (f"{yearB}-{monthB}-{dayB}T00:00:00Z")
+    else:
+        ageBefore = False
+
+    sleep(0.6)
+    dateAfter = input("\nDo you need videos after some time?(y/n): ")
+
+    if dateAfter.lower() == "y":
+        yearA, monthA, dayA = age_calendar(dateAfter=True)
+        
+        ageAfter = (f"{yearA}-{monthA}-{dayA}T00:00:00Z")
+    else:
+        ageAfter = False
         
 
     sleep(0.6)
     durationQ = input("\nDo you need a duration of video(y/n): ")
     if durationQ == "y":
-        duration = input('\nEnter it literally: "short", "medium", "long": ')
+        duration = input('\nShort - less 4 minutes; medium - from 4 to 20 minutes; long - from 20 minutes. Enter: short/medium/long: ')
         while True:
             if duration in ["short", "medium", "long"]:
                 break
             else:
-                duration = input("\nEnter it again: ")
+                duration = input("\nEnter again: ")
         duration.lower()
     else:
-        duration = None
+        duration = "any"
 
-    return age, duration
+    sleep(0.6)
+    maximum = input("\nHow much do you want to receive videos?: ")
+    while True:
+        if maximum.isdigit():
+            break
+        else:
+            maximum = input("\nEnter again: ")
+            
+    maximum = int(maximum)
+    if maximum > 51:
+        maximum = 50
+    elif maximum < 4:
+        maximum = 5
+
+    return keywords, region, ageAfter, ageBefore, duration, maximum, which_order, dimension
 
 
-def collect_searches(youtube, keywords, region, age, duration, maximum):
+def collect_searches(youtube, keywords, region, ageAfter, ageBefore, duration, maximum, which_order, dimension):
     try:
         request = youtube.search().list(
+            videoDimension=dimension,
             q=keywords,
             regionCode=region,
-            publishedAfter=age,
+            publishedBefore=ageBefore,
+            order=which_order,
+            publishedAfter=ageAfter,
             videoDuration=duration,
             part="snippet",
             type="video",
