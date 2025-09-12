@@ -2,8 +2,13 @@ from googleapiclient.errors import HttpError
 import re
 import requests
 import json
+from time import sleep
+import os
 
-def youtube_id_finder(url):
+def youtube_id_finder():
+    sleep(0.6)
+    url = input("\nEnter the url: ")
+
     while True:
         pattern = r"(?:v=|\/)([0-9A-Za-z_-]{11})"
         match = re.search(pattern, url)
@@ -39,7 +44,17 @@ def channel_name(video_id, api_key):
 
         return {}, True
 
-def youtube_which_order():
+def youtube_filters():
+    search_terms = []
+    while True:
+        terms = input("\nEnter the keywords by one (press Enter to continue): ")
+        if terms == "":
+            break
+        search_terms.append(terms)
+
+    search_terms = set(search_terms)
+
+    sleep(0.6)
     which_order = input("\nDo you need to sort comments? By relevance - 1; By time - 2: ")
 
     if which_order == "1":
@@ -49,7 +64,7 @@ def youtube_which_order():
     else:
         which_order = "relevance"
 
-    return which_order
+    return which_order, search_terms
 
 def collect_comments(video_id, search_terms, which_order, youtube):
     comments = []
@@ -125,11 +140,19 @@ def count_keys(comments, search_terms):
         for kw in search_terms:
             counts[kw] += comment.lower().count(kw.lower())
 
-    print(f"Total comments: {amount_comments}")
+    print(f"\nTotal comments: {amount_comments}")
     for kw, count in counts.items():
         print(f"{kw}: {count}")
     
-def numberofcomments(comments, number, channel):
+def number_comments(comments, channel):
+    number = input("\nHow many comments do you need?: ")
+    while True:
+        if number.isdigit():
+            break
+        else:
+            number = input("\nEnter again: ")
+    os.system('cls')
+
     print(f"Channel: {channel}")
     for i, c in enumerate(comments[:int(number)], 1):
         print(f"\n\n{i}:\n{c}")

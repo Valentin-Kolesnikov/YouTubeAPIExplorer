@@ -3,6 +3,7 @@ from time import sleep
 from googleapiclient.errors import HttpError
 import asyncio
 import aiohttp
+import re
 
 def age_calendar(dateBefore=False, dateAfter=False):
     plus_year = False
@@ -59,23 +60,30 @@ def age_calendar(dateBefore=False, dateAfter=False):
     elif dateAfter:
         day = str(1).zfill(2)
     elif dateBefore:
-        day = now.day
+        day = str(now.day).zfill(2)
         
     return year, month, day
 
 
 def searching_for_videos():
     sleep(0.6)
-    keywords = input("\nEnter a request on YouTube: ")
+    keywords = input("\nEnter a request on YouTube without (| and -): ")
+    while True:
+        if not keywords:
+            keywords = input("\nEnter again: ")
+        else:
+            break
+    keywords = re.sub(r"[|-]", " ", keywords)
 
     sleep(0.6)
     region = input("\nWhat region would you like? (Enter as US, RU, UK, etc): ")
     while True:
         if len(region) == 2 and region.isalpha():
+            region = region.upper()
             break
         else:
             region = input("\nEnter again: ")
-    region.upper()
+            region = region.upper()
 
     sleep(0.6)
     filterQ = input("\nDo you need to sort the video?(y/n): ")
@@ -91,12 +99,13 @@ def searching_for_videos():
                 which_order = input("\nEnter again: ")
 
         dimension = input("\nWhat dimension do you need? Enter: 2d/3d/any: ")
+        dimension = dimension.lower()
         while True:
             if dimension in ["2d", "3d", "any"]:
                 break
             else:
                 dimension = input("\nEnter again: ")
-        dimension.lower()
+                dimension = dimension.lower()
     else:
         which_order = "relevance"
         dimension = "any"
@@ -122,16 +131,17 @@ def searching_for_videos():
         
 
     sleep(0.6)
-    durationQ = input("\nDo you need a duration of video(y/n): ")
+    durationQ = input("\nDo you need a duration of video?(y/n): ")
     if durationQ == "y":
         duration = input('\nShort - less 4 minutes; medium - from 4 to 20 minutes; long - from 20 minutes. Enter: short/medium/long: ')
+        duration = duration.lower()
         while True:
             if duration in ["short", "medium", "long"]:
                 break
             else:
                 duration = input("\nEnter again: ")
-        duration.lower()
-    else:
+                duration = duration.lower()
+    else:  
         duration = "any"
 
     sleep(0.6)
@@ -256,6 +266,10 @@ def collect_stats(youtube, video_ids, channel_ids):
 
         return {}, {}, True
     
+    except Exception:
+        print("Probably, YouTube has problems with submitted objects")
+
+        return {}, {}, True
     
 def output_videos(results, statrequest, dict_channels):
     number = 0
