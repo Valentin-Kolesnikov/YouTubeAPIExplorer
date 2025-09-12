@@ -1,28 +1,17 @@
 from CommentExplorer import *
 from VideoExplorer import *
-from KeyExplorer import youtube_api_key
+from KeyExplorer import youtube_api_key, window_title
 from QuotaExplorer import test_quota
 from time import sleep
 import asyncio
 import os
+import sys
 
 def launcherComments(youtube):
-    sleep(0.6)
-    url = input("\nEnter the url: ")     
-    video_id = youtube_id_finder(url)
+    video_id = youtube_id_finder()
 
     sleep(0.6)
-    search_terms = []
-    while True:
-        terms = input("\nEnter the keywords by one (press Enter to continue): ")
-        if terms == "":
-            break
-        search_terms.append(terms)
-
-    search_terms = set(search_terms)
-
-    sleep(0.6)
-    which_order = youtube_which_order()
+    which_order, search_terms = youtube_filters()
 
     comments, exc = collect_comments(video_id, search_terms, which_order, youtube)
     if exc:
@@ -37,38 +26,18 @@ def launcherComments(youtube):
     count_keys(comments, search_terms)
 
     sleep(0.6)
-    number = int(input("\nHow many comments do you need?: "))
-    os.system('cls')
-    numberofcomments(comments, number, channel)
+    number_comments(comments, channel)
 
-    input("\nPress Enter to continue...")
+    input("\nPress Enter to return...")
 
 
 def launcherVideos(youtube):
-    sleep(0.6)
-    keywords = input("\nEnter a request on YouTube: ")
+    keywords, region, ageAfter, ageBefore, duration, maximum, which_order, dimension = searching_for_videos()
 
-    sleep(0.6)
-    region = input("\nWhat region would you like? (Enter as US, RU, UK, etc): ")
-    region.upper()
-    while True:
-        if len(region) == 2 and region.isalpha():
-            break
-        else:
-            region = input("\nEnter it again: ")
-
-    age, duration = searching_for_videos()
-
-    sleep(0.6)
-    maximum = int(input("\nHow much do you want to receive videos?: "))
-    if maximum > 51:
-        maximum = 50
-    elif maximum < 4:
-        maximum = 5
     sleep(1.2)
     os.system('cls')
 
-    video_ids, channel_ids, exc = collect_searches(youtube, keywords, region, age, duration, maximum)
+    video_ids, channel_ids, exc = collect_searches(youtube, keywords, region, ageAfter, ageBefore, duration, maximum, which_order, dimension)
     if exc:
         os.system('cls')
         return
@@ -82,14 +51,15 @@ def launcherVideos(youtube):
 
     output_videos(results, statrequest, dict_channels)
 
-    input("Press Enter to continue...")
+    input("Press Enter to return...")
 
     
 def launcherChannels(youtube):
 
-    input("Press Enter to continue...")
+    input("Press Enter to return...")
 
 if __name__ == "__main__":
+    window_title("YouTube Explorer")
     youtube, api_key = youtube_api_key()
     print("Key is accepted!")
     sleep(0.6)
@@ -115,6 +85,6 @@ if __name__ == "__main__":
                 launcherChannels(youtube)
                 break
             elif questionist == '0':
-                exit(0)
+                sys.exit(0)
             else:
-                questionist = input("Enter it again: ")
+                questionist = input("Enter again: ")
