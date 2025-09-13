@@ -117,7 +117,7 @@ def searching_for_videos():
 
         ageBefore = (f"{yearB}-{monthB}-{dayB}T00:00:00Z")
     else:
-        ageBefore = False
+        ageBefore = None
 
     sleep(0.6)
     dateAfter = input("\nDo you need videos after some time?(y/n): ")
@@ -127,7 +127,7 @@ def searching_for_videos():
         
         ageAfter = (f"{yearA}-{monthA}-{dayA}T00:00:00Z")
     else:
-        ageAfter = False
+        ageAfter = None
         
 
     sleep(0.6)
