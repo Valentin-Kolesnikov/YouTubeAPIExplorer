@@ -1,11 +1,15 @@
 from CommentExplorer import youtube_id_finder, youtube_filters
-from FirstFunction.collecting_info import collect_comments, channel_name
-from FirstFunction.output import count_keys, number_comments
+from FirstFunctions.collecting_info import collect_comments, channel_name
+from FirstFunctions.output import count_keys, number_comments
 from VideoExplorer import searching_for_videos
-from SecondFunctions.collecting_info import collect_searches, collect_stats, ryd
+from SecondFunctions.collecting_info import collect_searches, collect_stats
 from SecondFunctions.output import output_videos
 from Starter.KeyExplorer import youtube_api_key, window_title
 from Starter.QuotaExplorer import test_quota
+from ChannelExplorer import get_info
+from ThirdFunctions.collecting_info import collect_channel_info, collect_popular_videos, collect_statistics
+from ThirdFunctions.output import output_channel
+from Patterns.asyncRYD import ryd
 from time import sleep
 import asyncio
 import os
@@ -60,6 +64,26 @@ def launcherVideos(youtube):
 
     
 def launcherChannels(youtube):
+    for_id, for_handle = get_info()
+
+    snistics, uploads_videos, excs = collect_channel_info(youtube, for_id, for_handle)
+    if excs:
+        os.system('cls')
+        return
+    
+    videoIds, excs = collect_popular_videos(youtube, uploads_videos)
+    if excs:
+        os.system('cls')
+        return
+
+    result = asyncio.run(ryd(videoIds))
+
+    statrequests, excs = collect_statistics(youtube, videoIds)
+    if excs:
+        os.system('cls')
+        return
+    
+    output_channel(result, statrequests, snistics)
 
     input("\nPress Enter to return...")
 
@@ -82,7 +106,7 @@ if __name__ == "__main__":
         print("What do you need to explore?")
         sleep(0.6)
 
-        questionist = input("Comments - 1; Videos - 2; Channels - 3; Liked-Disliked Videos - 4; Exit - 0: ")
+        questionist = input("Comments - 1; Videos - 2; Channels - 3; Exit - 0: ") # Liked-Disliked Videos - 4
         while True:
             if questionist == '1':
                 launcherComments(youtube)
@@ -93,9 +117,9 @@ if __name__ == "__main__":
             elif questionist == '3':
                 launcherChannels(youtube)
                 break
-            elif questionist == '4':
-                launcherLikedDis(youtube)
-                break
+            # elif questionist == '4':
+            #     launcherLikedDis(youtube)
+            #     break
             elif questionist == '0':
                 sys.exit(0)
             else:
