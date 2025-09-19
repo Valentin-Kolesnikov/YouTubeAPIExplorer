@@ -11,7 +11,7 @@ def output_channel(result, statrequests, snistics):
           f"{snistics["subscriberCount"]} subs; {snistics["videoCount"]} videos; {snistics["viewCount"]} views.\n"
           f"Registration date: {snistics["publishedAt"]}\n")
     print("-" * 50)
-    print(f"\nFive videos from the newest:\n")
+    print(f"\nThree videos from the newest:\n")
     
     number = 0
     for item in statrequests["items"]:

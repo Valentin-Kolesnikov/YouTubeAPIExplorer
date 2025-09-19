@@ -20,7 +20,7 @@ def collect_channel_info(youtube, for_id, for_handle):
         snistics = {
             "title": snippet.get("title"),
             "channelId": channel_id,
-            "description": snippet.get("description", "No description")[:500],
+            "description": snippet.get("description")[:500],
             "publishedAt": snippet.get("publishedAt")[:10],
             "customUrl": snippet.get("customUrl", "N/A"),  
             "viewCount": statistics.get("viewCount"),
