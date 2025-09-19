@@ -1,5 +1,6 @@
 from googleapiclient.errors import HttpError
 from Patterns.httperror import http_error
+from datetime import datetime
 
 
 def collect_channel_info(youtube, for_id, for_handle):
@@ -17,11 +18,16 @@ def collect_channel_info(youtube, for_id, for_handle):
         
         snippet = request["items"][0]["snippet"]
         statistics = request["items"][0]["statistics"]
+
+        chpublished_at = snippet.get("publishedAt")
+        dt = datetime.fromisoformat(chpublished_at.replace("Z", "+00:00"))
+        chformatted_date = dt.strftime("%d.%m.%Y")
+        
         snistics = {
             "title": snippet.get("title"),
             "channelId": channel_id,
             "description": snippet.get("description")[:500],
-            "publishedAt": snippet.get("publishedAt")[:10],
+            "publishedAt": chformatted_date,
             "customUrl": snippet.get("customUrl", "N/A"),  
             "viewCount": statistics.get("viewCount"),
             "subscriberCount": statistics.get("subscriberCount"),
