@@ -25,7 +25,7 @@ dist/
 *.bin
 
 # My Files
-*D.py
+*DT.py
 *.drawio
 *tempCodeRunnerFile.py
 Pictures/
