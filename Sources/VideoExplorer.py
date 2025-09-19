@@ -104,7 +104,7 @@ def searching_for_videos():
     maximum = int(maximum)
     if maximum > 51:
         maximum = 50
-    elif maximum < 4:
-        maximum = 5
+    elif maximum < 1:
+        maximum = 1
 
     return keywords, region, ageAfter, ageBefore, duration, maximum, which_order, dimension
