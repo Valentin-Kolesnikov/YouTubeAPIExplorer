@@ -9,7 +9,7 @@ def channel_name(video_id, api_key):
             "https://www.googleapis.com/youtube/v3/videos",
             params={"part": "snippet", "id": video_id, "key": api_key}
         )
-        return name.json()["items"][0]["snippet"]["channelTitle"], False
+        return name.json()["items"][0]["snippet"]["channelId"], False
     
     except HttpError as exc:
         
