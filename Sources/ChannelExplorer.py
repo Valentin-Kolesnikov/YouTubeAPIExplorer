@@ -3,7 +3,7 @@ import re
 
 def get_info():
     sleep(0.6)
-    NameId = input("\nEnter the link with UC... or @... to the channel: ")
+    NameId = input("\nEnter the link with UC... or @... to the channel (possible separately): ")
     NameId = NameId.strip()
     while True:
         for_id = re.search(r"(UC[\w-]{22})", NameId)
