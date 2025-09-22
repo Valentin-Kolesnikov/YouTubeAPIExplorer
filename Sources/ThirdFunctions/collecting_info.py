@@ -53,6 +53,58 @@ def collect_channel_info(youtube, for_id, for_handle):
 
         return {}, {}, True
     
+    
+def search_channel_videos(youtube, snistics, keywords, ageAfter, ageBefore, duration, maximum, which_order, dimension):
+    try:
+        video_collection = youtube.search().list(
+            part="snippet",
+            channelId=snistics['channelId'],
+            q=keywords,
+            type="video",
+            maxResults=maximum,
+            videoDimension=dimension,
+            publishedBefore=ageBefore,
+            order=which_order,
+            publishedAfter=ageAfter,
+            videoDuration=duration,
+        ).execute()
+
+        video_Ids = []
+
+        for item in video_collection["items"]:
+                videos = item["id"]["videoId"]
+                video_Ids.append(videos)
+
+        return video_Ids, False
+    
+    except HttpError as exc:
+        
+        http_error(exc)
+        
+        return {}, True
+    
+
+def collect_channel_stats_videos(youtube, video_Ids):
+    try:
+        statrequests = youtube.videos().list(
+            part="snippet,statistics",
+            id=",".join(video_Ids)
+        ).execute()
+        
+        return statrequests, False
+    
+    except HttpError as exc:
+
+        http_error(exc)
+
+        return {}, True
+    
+    except Exception:
+        print("Probably, YouTube has problems with submitted objects")
+
+        return {}, True
+    
+
 def collect_popular_videos(youtube, uploads_videos):
     try:
         collection = youtube.playlistItems().list(
