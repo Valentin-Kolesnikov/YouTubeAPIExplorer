@@ -25,11 +25,7 @@ def get_answer():
         elif get_answers == "n":
             break
         else:
-            get_answers = input("Enter again: ")
+            get_answers = input("\nEnter again: ")
             get_answers.lower()
-    
-    # while get_answers == "y" or get_answers == "n":
-    #     get_answers = input("Enter again: ")
-    #     get_answers.lower()
 
     return get_answers

@@ -91,7 +91,7 @@ def launcherChannels(youtube):
             os.system('cls')
             return
 
-        output_channel_info(result, statrequests, get_answer, snistics)
+        output_channel_info(result, statrequests, get_answers, snistics)
 
     elif get_answers == "n":
         videoIds, exc = collect_popular_videos(youtube, uploads_videos)
@@ -106,7 +106,7 @@ def launcherChannels(youtube):
             os.system('cls')
             return
         
-        output_channel_info(result, statrequests, get_answer, snistics)
+        output_channel_info(result, statrequests, get_answers, snistics)
 
     input("\nPress Enter to return...")
 
