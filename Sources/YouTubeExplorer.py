@@ -7,7 +7,7 @@ from SecondFunctions.output import output_videos
 from Starter.KeyExplorer import youtube_api_key, window_title
 from Starter.QuotaExplorer import test_quota
 from ChannelExplorer import get_info, get_answer
-from ThirdFunctions.collecting_info import * #collect_channel_info, collect_popular_videos, collect_statistics
+from ThirdFunctions.collecting_info import collect_channel_info, search_channel_videos, collect_channel_stats_videos, collect_popular_videos, collect_statistics
 from ThirdFunctions.output import output_channel_info
 from Patterns.asyncRYD import ryd
 from Patterns.SearchingSecondThird import search_engine
