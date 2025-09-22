@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 
-def output_channel_info(result, statrequests, get_answer, snistics):
+def output_channel_info(result, statrequests, get_answers, snistics):
     os.system("cls")
     print(f"Channel: {snistics["title"]}\n"
           f"https://www.youtube.com/channel/{snistics["channelId"]}\n"
@@ -11,10 +11,10 @@ def output_channel_info(result, statrequests, get_answer, snistics):
           f"Registration date: {snistics["publishedAt"]}\n")
     print("-" * 50)
 
-    if get_answer == "y":
-        print(f"\nYour received videos:\n")
-    elif get_answer == "n":
-        print(f"\nThree videos from the newest:\n")
+    if get_answers == "y":
+        print(f"Your received videos:\n")
+    elif get_answers == "n":
+        print(f"Three videos from the newest:\n")
 
     number = 0
     for item in statrequests["items"]:

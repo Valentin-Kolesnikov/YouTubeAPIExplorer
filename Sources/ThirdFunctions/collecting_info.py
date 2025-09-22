@@ -26,7 +26,7 @@ def collect_channel_info(youtube, for_id, for_handle):
         snistics = {
             "title": snippet.get("title"),
             "channelId": channel_id,
-            "description": snippet.get("description")[:500],
+            "description": snippet.get("description"),
             "publishedAt": chformatted_date,
             "customUrl": snippet.get("customUrl", "N/A"),  
             "viewCount": statistics.get("viewCount"),
@@ -100,7 +100,7 @@ def collect_channel_stats_videos(youtube, video_Ids):
         return {}, True
     
     except Exception:
-        print("Probably, YouTube has problems with submitted objects")
+        print("\nProbably, YouTube has problems with submitted objects")
 
         return {}, True
     
@@ -143,6 +143,6 @@ def collect_statistics(youtube, videosIds):
         return {}, True
     
     except Exception:
-        print("Probably, YouTube has problems with submitted objects")
+        print("\nProbably, YouTube has problems with submitted objects")
 
         return {}, True
