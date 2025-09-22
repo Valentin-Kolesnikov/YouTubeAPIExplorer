@@ -6,14 +6,16 @@ from SecondFunctions.collecting_info import collect_searches, collect_stats
 from SecondFunctions.output import output_videos
 from Starter.KeyExplorer import youtube_api_key, window_title
 from Starter.QuotaExplorer import test_quota
-from ChannelExplorer import get_info
-from ThirdFunctions.collecting_info import collect_channel_info, collect_popular_videos, collect_statistics
-from ThirdFunctions.output import output_channel
+from ChannelExplorer import get_info, get_answer
+from ThirdFunctions.collecting_info import * #collect_channel_info, collect_popular_videos, collect_statistics
+from ThirdFunctions.output import output_channel_info
 from Patterns.asyncRYD import ryd
+from Patterns.SearchingSecondThird import search_engine
 from time import sleep
+from sys import exit
 import asyncio
 import os
-import sys
+
 
 def launcherComments(youtube):
     video_id = youtube_id_finder()
@@ -66,24 +68,45 @@ def launcherVideos(youtube):
 def launcherChannels(youtube):
     for_id, for_handle = get_info()
 
-    snistics, uploads_videos, excs = collect_channel_info(youtube, for_id, for_handle)
-    if excs:
+    get_answers = get_answer()
+
+    snistics, uploads_videos, exc = collect_channel_info(youtube, for_id, for_handle)
+    if exc:
         os.system('cls')
         return
     
-    videoIds, excs = collect_popular_videos(youtube, uploads_videos)
-    if excs:
-        os.system('cls')
-        return
+    if get_answers == "y":
 
-    result = asyncio.run(ryd(videoIds))
+        keywords, ageAfter, ageBefore, duration, maximum, which_order, dimension = search_engine()
 
-    statrequests, excs = collect_statistics(youtube, videoIds)
-    if excs:
-        os.system('cls')
-        return
-    
-    output_channel(result, statrequests, snistics)
+        video_Ids, exc = search_channel_videos(youtube, snistics, keywords, ageAfter, ageBefore, duration, maximum, which_order, dimension)
+        if exc:
+            os.system('cls')
+            return
+        
+        result = asyncio.run(ryd(video_Ids))
+
+        statrequests, exc = collect_channel_stats_videos(youtube, video_Ids)
+        if exc:
+            os.system('cls')
+            return
+
+        output_channel_info(result, statrequests, get_answer, snistics)
+
+    elif get_answers == "n":
+        videoIds, exc = collect_popular_videos(youtube, uploads_videos)
+        if exc:
+            os.system('cls')
+            return
+
+        result = asyncio.run(ryd(videoIds))
+
+        statrequests, exc = collect_statistics(youtube, videoIds)
+        if exc:
+            os.system('cls')
+            return
+        
+        output_channel_info(result, statrequests, get_answer, snistics)
 
     input("\nPress Enter to return...")
 
@@ -121,6 +144,6 @@ if __name__ == "__main__":
             #     launcherLikedDis(youtube)
             #     break
             elif questionist == '0':
-                sys.exit(0)
+                exit(0)
             else:
                 questionist = input("\nEnter again: ")
