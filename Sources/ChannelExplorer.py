@@ -15,3 +15,21 @@ def get_info():
             return None, for_handle.group(0)
 
         NameId = input("\nEnter again: ")
+
+def get_answer():
+    get_answers = input("\nDo you need to search for videos from the channel?(y/n): ")
+    get_answers.lower()
+    while True:
+        if get_answers == "y":
+            break
+        elif get_answers == "n":
+            break
+        else:
+            get_answers = input("Enter again: ")
+            get_answers.lower()
+    
+    # while get_answers == "y" or get_answers == "n":
+    #     get_answers = input("Enter again: ")
+    #     get_answers.lower()
+
+    return get_answers
