@@ -6,7 +6,7 @@ def output_channel_info(result, statrequests, get_answers, snistics):
     print(f"Channel: {snistics["title"]}\n"
           f"https://www.youtube.com/channel/{snistics["channelId"]}\n"
           f"CustomUrl: {snistics["customUrl"]}\n"
-          f"Description:\n   {snistics["description"]}\n"
+          f"Description:\n {snistics["description"]}\n"
           f"{snistics["subscriberCount"]} subs; {snistics["videoCount"]} videos; {snistics["viewCount"]} views.\n"
           f"Registration date: {snistics["publishedAt"]}\n")
     print("-" * 50)
@@ -22,7 +22,7 @@ def output_channel_info(result, statrequests, get_answers, snistics):
         videos_id = item["id"]
         vpublished_at = item["snippet"]["publishedAt"]
         dt = datetime.fromisoformat(vpublished_at.replace("Z", "+00:00"))
-        vformatted_date = dt.strftime("%d.%m.%Y")
+        vformatted_date = dt.strftime("%d.%m.%Y %H:%M:%S")
 
         ch_likes = result.get(videos_id, {}).get("likes", "No")
         ch_dislikes = result.get(videos_id, {}).get("dislikes", "No")

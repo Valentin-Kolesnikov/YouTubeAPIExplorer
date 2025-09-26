@@ -7,7 +7,7 @@ def output_videos(results, statrequest, dict_channels):
         video_id = item["id"]
         published_at = item["snippet"]["publishedAt"]
         dt = datetime.fromisoformat(published_at.replace("Z", "+00:00"))
-        formatted_date = dt.strftime("%d.%m.%Y")
+        formatted_date = dt.strftime("%d.%m.%Y %H:%M:%S")
 
         likes = results.get(video_id, {}).get("likes", "No")
         dislikes = results.get(video_id, {}).get("dislikes", "No")
