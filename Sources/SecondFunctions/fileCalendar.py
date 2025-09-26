@@ -1,10 +1,8 @@
 from datetime import datetime
-from time import sleep
 
 def age_calendar(dateBefore=False, dateAfter=False):
     plus_year = False
     now = datetime.now()
-    sleep(1)
     year = input("\nEnter the year: ")
 
     if year.isdigit() and 2006 <= int(year) <= now.year:
@@ -19,7 +17,6 @@ def age_calendar(dateBefore=False, dateAfter=False):
     elif dateBefore:
         year = now.year
 
-    sleep(1)
     month = input("\nEnter the month numerously: ")
 
     if month.isdigit() and int(month) < 13 and int(month) != 0:
@@ -31,7 +28,6 @@ def age_calendar(dateBefore=False, dateAfter=False):
     elif dateBefore:
         month = str(now.month).zfill(2)
 
-    sleep(1)
     day = input("\nEnter the day numerously: ")
 
     if day.isdigit() and int(day) != 0 and int(day) < 32:

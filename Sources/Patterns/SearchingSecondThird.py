@@ -1,9 +1,7 @@
-from time import sleep
 from SecondFunctions.fileCalendar import age_calendar
 import re
 
 def search_engine():
-    sleep(0.6)
     keywords = input("\nEnter a request on YouTube without (| and -): ")
     while True:
         if not keywords:
@@ -12,7 +10,6 @@ def search_engine():
             break
     keywords = re.sub(r"[|-]", " ", keywords)
 
-    sleep(0.6)
     filterQ = input("\nDo you need to filter videos?(y/n): ")
     if filterQ == "y":
 
@@ -41,7 +38,6 @@ def search_engine():
             which_order = "relevance"
             dimension = "any"
 
-        sleep(0.6)
         dateBefore = input("\nDo you need videos before some time?(y/n): ")
         if dateBefore.lower() == "y":
             yearB, monthB, dayB = age_calendar(dateBefore=True)
@@ -51,7 +47,6 @@ def search_engine():
             ageBefore = None
 
 
-        sleep(0.6)
         dateAfter = input("\nDo you need videos after some time?(y/n): ")
 
         if dateAfter.lower() == "y":
@@ -62,7 +57,6 @@ def search_engine():
             ageAfter = None
         
 
-        sleep(0.6)
         durationQ = input("\nDo you need a duration of video?(y/n): ")
         if durationQ == "y":
             duration = input('\nShort - less 4 minutes; medium - from 4 to 20 minutes; long - from 20 minutes. Enter: short/medium/long: ')
@@ -83,7 +77,6 @@ def search_engine():
         duration = "any"
 
 
-    sleep(0.6)
     maximum = input("\nHow much do you want to receive videos?: ")
     while True:
         if maximum.isdigit():

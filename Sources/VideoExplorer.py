@@ -1,8 +1,6 @@
-from time import sleep
 from Patterns.SearchingSecondThird import search_engine
 
 def searching_for_videos():
-    sleep(0.6)
     region = input("\nWhat region would you like? (Enter as US, RU, UK, etc): ")
     while True:
         if len(region) == 2 and region.isalpha():

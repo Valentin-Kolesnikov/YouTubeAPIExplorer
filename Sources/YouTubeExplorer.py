@@ -9,9 +9,9 @@ from Starter.QuotaExplorer import test_quota
 from ChannelExplorer import get_info, get_answer
 from ThirdFunctions.collecting_info import collect_channel_info, search_channel_videos, collect_channel_stats_videos, collect_popular_videos, collect_statistics
 from ThirdFunctions.output import output_channel_info
+from LikedDislikedVideos import *
 from Patterns.asyncRYD import ryd
 from Patterns.SearchingSecondThird import search_engine
-from time import sleep
 from sys import exit
 import asyncio
 import os
@@ -20,7 +20,6 @@ import os
 def launcherComments(youtube):
     video_id = youtube_id_finder()
 
-    sleep(0.6)
     which_order, search_terms = youtube_filters()
 
     comments, exc = collect_comments(video_id, search_terms, which_order, youtube)
@@ -36,7 +35,6 @@ def launcherComments(youtube):
     os.system('cls')
     count_keys(comments, search_terms)
 
-    sleep(0.6)
     number_comments(comments, channel)
 
     input("\nPress Enter to return...")
@@ -44,10 +42,7 @@ def launcherComments(youtube):
 
 def launcherVideos(youtube):
     keywords, region, ageAfter, ageBefore, duration, maximum, which_order, dimension = searching_for_videos()
-
-    sleep(1.2)
-    os.system('cls')
-
+    
     video_ids, channel_ids, exc = collect_searches(youtube, keywords, region, ageAfter, ageBefore, duration, maximum, which_order, dimension)
     if exc:
         os.system('cls')
@@ -59,6 +54,8 @@ def launcherVideos(youtube):
     if exc:
         os.system('cls')
         return
+    
+    os.system('cls')
 
     output_videos(results, statrequest, dict_channels)
 
@@ -117,8 +114,6 @@ def launcherLikedDis(youtube):
 if __name__ == "__main__":
     window_title("YouTube Explorer")
     youtube, api_key = youtube_api_key()
-    print("Key is accepted!")
-    sleep(0.6)
 
     if not test_quota(youtube):
         input("Press Enter to exit...")
@@ -127,9 +122,8 @@ if __name__ == "__main__":
     while True:
         os.system('cls')
         print("What do you need to explore?")
-        sleep(0.6)
 
-        questionist = input("Comments - 1; Videos - 2; Channels - 3; Exit - 0: ") # Liked-Disliked Videos - 4
+        questionist = input("Comments - 1; Videos - 2; Channels - 3; Liked-Disliked Videos - 4; Exit - 0: ") 
         while True:
             if questionist == '1':
                 launcherComments(youtube)
@@ -140,9 +134,9 @@ if __name__ == "__main__":
             elif questionist == '3':
                 launcherChannels(youtube)
                 break
-            # elif questionist == '4':
-            #     launcherLikedDis(youtube)
-            #     break
+            elif questionist == '4':
+                launcherLikedDis(youtube)
+                break
             elif questionist == '0':
                 exit(0)
             else:
