@@ -1,5 +1,5 @@
 from googleapiclient.errors import HttpError
-from Patterns.httperror import http_error
+from Patterns.errors import http_error, WinError
 import requests
 import json
 
@@ -17,17 +17,21 @@ def channel_name(video_id, api_key):
 
         return {}, True
     
+    except OSError as exc:
+
+        WinError(exc)
+
+        return {}, True
+    
 def collect_comments(video_id, search_terms, which_order, youtube):
     comments = []
-    next_page_token = None
 
     try:
         while True:
             request = youtube.commentThreads().list(
                 part= "snippet,replies",
                 videoId= video_id,
-                pageToken= next_page_token,
-                maxResults= 50,
+                maxResults= 100,
                 textFormat= "plainText",
                 order= which_order,
             ).execute()
@@ -51,11 +55,7 @@ def collect_comments(video_id, search_terms, which_order, youtube):
 
             comments = list(set(comments))
 
-            next_page_token = request.get("nextPageToken")
-            if not next_page_token:
-                break
-
-        return comments, False
+            return comments, False
     
     except HttpError as exc:
         status = exc.resp.status
@@ -80,5 +80,11 @@ def collect_comments(video_id, search_terms, which_order, youtube):
             print(f"\n\u001b[31mUnexpected HTTP error: {status}\u001b[0m")
         
         input("\nPress Enter to return...")
+
+        return {}, True
+    
+    except OSError as exc:
+
+        WinError(exc)
 
         return {}, True
