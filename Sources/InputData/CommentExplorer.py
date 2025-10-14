@@ -14,16 +14,17 @@ def youtube_id_finder():
 def youtube_filters():
     search_terms = []
     terms = input("\nEnter the keywords by one (press Enter to continue): ")
+
     while True:
         if terms == "":
             break
         search_terms.append(terms)
-        terms = ("More?: ")
+        terms = input("More?: ")
 
     search_terms = set(search_terms)
 
 
-    which_order = input("\nDo you need to sort comments? By relevance - 1; By time - 2: ")
+    which_order = input("\n1. By relevance\n2. By time\nEnter the choice: ")
 
     while True:
         if which_order == "1":
