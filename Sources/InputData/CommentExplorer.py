@@ -19,7 +19,7 @@ def youtube_filters():
         if terms == "":
             break
         search_terms.append(terms)
-        terms = input("More?: ")
+        terms = input("\nMore?: ")
 
     search_terms = set(search_terms)
 
