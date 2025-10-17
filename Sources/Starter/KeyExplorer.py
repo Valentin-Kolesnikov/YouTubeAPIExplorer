@@ -7,7 +7,10 @@ if getattr(sys, "frozen", False):
 else:
     app_folder = os.path.dirname(__file__)
 
-key_file = os.path.join(app_folder, "Key.bin")
+key_folder = os.path.join(app_folder, "Keys")
+os.makedirs(key_folder, exist_ok=True)
+
+key_file = os.path.join(key_folder, "Key.bin")
 
 class memory():
     def save_key(api_key):
