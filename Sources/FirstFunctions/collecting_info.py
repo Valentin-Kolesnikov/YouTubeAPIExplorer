@@ -1,16 +1,16 @@
 from googleapiclient.errors import HttpError
 from Patterns.errors import http_error, WinError
-import requests
 import json
 
-def channel_name(video_id, api_key):
+def channel_name(video_id, youtube):
     try:
-        name = requests.get(
-            "https://www.googleapis.com/youtube/v3/videos",
-            params={"part": "snippet", "id": video_id, "key": api_key}
-        )
-        return name.json()["items"][0]["snippet"]["channelId"], False
-    
+        name = youtube.videos().list(
+            part="snippet",
+            id=video_id
+        ).execute()
+
+        return name["items"][0]["snippet"]["channelId"], False
+        
     except HttpError as exc:
         
         http_error(exc)

@@ -29,7 +29,7 @@ def youtube_api_key():
         memory.save_key(api_key)
     youtube = build('youtube', 'v3', developerKey=api_key)
     
-    return youtube, api_key
+    return youtube
 
 def window_title(title):
     if os.name == "nt":

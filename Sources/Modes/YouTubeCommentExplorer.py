@@ -1,4 +1,3 @@
-from Starter.KeyExplorer import youtube_api_key
 from InputData.CommentExplorer import youtube_id_finder, youtube_filters
 from FirstFunctions.collecting_info import collect_comments, channel_name
 from FirstFunctions.output import count_keys, number_comments
@@ -14,9 +13,7 @@ def launcherComments(youtube):
         os.system('cls')
         return
     
-    _, api_key=youtube_api_key()
-
-    channel, exc = channel_name(video_id, api_key)
+    channel, exc = channel_name(video_id, youtube)
     if exc:
         os.system('cls')
         return

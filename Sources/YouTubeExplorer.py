@@ -10,7 +10,7 @@ from Starter.KeyExplorer import youtube_api_key, window_title
 
 from Starter.QuotaExplorer import test_quota
 
-# from Starter.OAuth2 import youtube_OAuth2     I'll try to integrate or to replace YouTube API Data v3 code with OAuth2
+from Starter.OAuth2 import youtube_OAuth2
 
 from sys import exit
 
@@ -23,8 +23,13 @@ import os
 
 
 if __name__ == "__main__":
-    window_title("YouTubeExplorer")
-    youtube, api_key = youtube_api_key()
+    window_title("YouTube Explorer")
+
+    youtube, exc = youtube_OAuth2()
+    if exc:
+        input("\nYou need OAuth 2 to use some points in Playlists.\n\nPress Enter to continue...")
+
+        youtube = youtube_api_key()
 
     if not test_quota(youtube):
         input("Press Enter to exit...")

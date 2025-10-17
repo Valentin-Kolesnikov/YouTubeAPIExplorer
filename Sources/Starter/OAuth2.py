@@ -16,7 +16,8 @@ def youtube_OAuth2():
             raise FileNotFoundError
         client_file = file[0]
 
-        link = ["https://www.googleapis.com/auth/youtube.readonly"]
+        link = ["https://www.googleapis.com/auth/youtube.readonly",
+                "https://www.googleapis.com/auth/youtube.force-ssl"]
 
         delivery = InstalledAppFlow.from_client_secrets_file(client_file, link)
         credits = delivery.run_local_server(port=8080)
@@ -28,6 +29,6 @@ def youtube_OAuth2():
     except FileNotFoundError:
         print("The file client_secret_*.json is not found.")
 
-        input("\nPress Enter to return...")
+        input("\nPress Enter...")
 
         return {}, True
