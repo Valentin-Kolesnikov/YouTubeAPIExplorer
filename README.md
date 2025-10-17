@@ -5,7 +5,7 @@
    <img src="https://img.shields.io/badge/Code_Editor-VS%20Code-blue" alt="Code Editor VS Code">
    <img src="https://img.shields.io/badge/Version-Pre--Release-purple" alt="Version Pre-Release">
    <img src="https://img.shields.io/badge/License-MIT-red" alt="License MIT">
-   <img src="https://img.shields.io/badge/Python-3.13.7-yellowblue" alt="Python 3.13.7">
+   <img src="https://img.shields.io/badge/Python-3.13.7-yellowblue" alt="Python 3.14.0">
 </p>
 
 # (Console Beta version)  
