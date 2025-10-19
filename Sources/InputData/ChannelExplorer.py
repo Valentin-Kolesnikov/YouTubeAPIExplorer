@@ -1,8 +1,14 @@
 import re
 
+
+
+
+
 def get_info():
+
     NameId = input("\nEnter the link with UC... or @... to the channel (possible separately): ")
     NameId = NameId.strip()
+
     while True:
         for_id = re.search(r"(UC[\w-]{22})", NameId)
         if for_id:
@@ -14,16 +20,23 @@ def get_info():
 
         NameId = input("\nEnter again: ")
 
+
+
+
 def get_answer():
     get_answers = input("\nDo you need to search for videos from the channel?(y/n): ")
     get_answers.lower()
+
     while True:
         if get_answers == "y":
             break
+
         elif get_answers == "n":
             break
+
         else:
             get_answers = input("\nEnter again: ")
             get_answers.lower()
+
 
     return get_answers

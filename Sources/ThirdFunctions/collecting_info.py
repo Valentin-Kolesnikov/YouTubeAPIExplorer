@@ -1,6 +1,11 @@
 from googleapiclient.errors import HttpError
+
 from Patterns.errors import http_error, WinError
+
 from datetime import datetime
+
+
+
 
 
 def collect_channel_info(youtube, for_id, for_handle):
@@ -23,6 +28,7 @@ def collect_channel_info(youtube, for_id, for_handle):
         dt = datetime.fromisoformat(chpublished_at.replace("Z", "+00:00"))
         chformatted_date = dt.strftime("%d.%m.%Y")
         
+
         snistics = {
             "title": snippet.get("title"),
             "channelId": channel_id,
@@ -33,19 +39,26 @@ def collect_channel_info(youtube, for_id, for_handle):
             "subscriberCount": statistics.get("subscriberCount"),
             "videoCount": statistics.get("videoCount")
         }
+
+
         uploads_videos = request["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
         
+
         return snistics, uploads_videos, False
     
+
     except HttpError as excs:
 
         http_error(excs)
 
         return {}, {}, True
     
+
     except Exception as excs:
+
         if ValueError:
             print("\nThe channel is not found.")
+
         else:
             print("\nUnknown problem.")
 
@@ -53,6 +66,7 @@ def collect_channel_info(youtube, for_id, for_handle):
 
         return {}, {}, True
     
+
     except OSError as exc:
 
         WinError(exc)
@@ -81,14 +95,17 @@ def search_channel_videos(youtube, snistics, keywords, ageAfter, ageBefore, dura
                 videos = item["id"]["videoId"]
                 video_Ids.append(videos)
 
+
         return video_Ids, False
     
+
     except HttpError as exc:
         
         http_error(exc)
         
         return {}, True
     
+
     except OSError as exc:
 
         WinError(exc)
@@ -105,17 +122,20 @@ def collect_channel_stats_videos(youtube, video_Ids):
         
         return statrequests, False
     
+
     except HttpError as exc:
 
         http_error(exc)
 
         return {}, True
     
+    
     except Exception:
         print("\nProbably, YouTube has problems with submitted objects")
 
         return {}, True
     
+
     except OSError as exc:
 
         WinError(exc)
@@ -136,7 +156,9 @@ def collect_popular_videos(youtube, uploads_videos):
             videoId = item["contentDetails"]["videoId"]
             videoIds.append(videoId)
 
+
         return videoIds, False
+
 
     except HttpError as excs:
 
@@ -144,6 +166,7 @@ def collect_popular_videos(youtube, uploads_videos):
 
         return {}, True
     
+
     except OSError as exc:
 
         WinError(exc)
@@ -160,16 +183,19 @@ def collect_statistics(youtube, videosIds):
 
         return statrequests, False
     
+
     except HttpError as excs:
 
         http_error(excs)
 
         return {}, True
     
+
     except Exception:
         print("\nProbably, YouTube has problems with submitted objects")
 
         return {}, True
+    
     
     except OSError as exc:
 

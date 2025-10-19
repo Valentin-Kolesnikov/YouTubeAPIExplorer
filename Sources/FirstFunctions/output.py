@@ -1,6 +1,7 @@
 def count_keys(comments, search_terms):
     counts = {kw: 0 for kw in search_terms}
     amount_comments = 0
+
     for comment in comments:
         amount_comments += 1
         for kw in search_terms:
@@ -12,6 +13,7 @@ def count_keys(comments, search_terms):
     
 def number_comments(comments, channel):
     number = input("\nHow many comments do you need?: ")
+    
     while True:
         if number.isdigit():
             break

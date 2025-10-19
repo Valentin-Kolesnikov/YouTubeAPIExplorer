@@ -1,10 +1,20 @@
 from google_auth_oauthlib.flow import InstalledAppFlow
+
 from googleapiclient.discovery import build
+
 from google.oauth2.credentials import Credentials
+
 from google.auth.transport.requests import Request
+
 import glob
+
 import os
+
 import sys
+
+
+
+
 
 link = ["https://www.googleapis.com/auth/youtube.readonly",
         "https://www.googleapis.com/auth/youtube.force-ssl"]
@@ -25,6 +35,7 @@ token_dir = os.path.join(key_folder, "Client_token.json")
 
 def credentials(client_file):
     credits = None
+
     if os.path.exists(token_dir):
         credits = Credentials.from_authorized_user_file(token_dir, link)
     
@@ -47,6 +58,7 @@ def youtube_OAuth2():
     try:
         file = glob.glob(os.path.join(key_folder, "client_secret_*.json"))
         if not file:
+
             raise FileNotFoundError
         client_file = file[0] 
         
@@ -57,6 +69,7 @@ def youtube_OAuth2():
         OAuth2youtube = build("youtube", "v3", credentials=credits)
 
         return OAuth2youtube, False
+    
     
     except FileNotFoundError:
         print("The file client_secret_*.json is not found.")

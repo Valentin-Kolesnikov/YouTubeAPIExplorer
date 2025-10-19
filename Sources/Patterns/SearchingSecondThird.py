@@ -1,13 +1,21 @@
 from SecondFunctions.fileCalendar import age_calendar
 import re
 
+
+
+
+
+
 def search_engine():
     keywords = input("\nEnter a request on YouTube without (| and -): ")
+
     while True:
         if not keywords:
             keywords = input("\nEnter again: ")
+
         else:
             break
+
     keywords = re.sub(r"[|-]", " ", keywords)
 
     filterQ = input("\nDo you need to filter videos?(y/n): ")
@@ -39,6 +47,7 @@ def search_engine():
                 elif which_order in which_orderDict:
                     which_order = which_orderDict[which_order]
                     break
+
                 else:
                     which_order = input("\nEnter again: ")
 
@@ -53,6 +62,7 @@ def search_engine():
                 if dimension in dimensionDict:
                     dimension = dimensionDict[dimension]
                     break
+
                 else:
                     dimension = input("\nEnter again: ")
         else:
@@ -60,10 +70,12 @@ def search_engine():
             dimension = "any"
 
         dateBefore = input("\nDo you need videos before some time?(y/n): ")
+
         if dateBefore.lower() == "y":
             yearB, monthB, dayB = age_calendar(dateBefore=True)
 
             ageBefore = (f"{yearB}-{monthB}-{dayB}T00:00:00Z")
+
         else:
             ageBefore = None
 
@@ -74,6 +86,7 @@ def search_engine():
             yearA, monthA, dayA = age_calendar(dateAfter=True)
             
             ageAfter = (f"{yearA}-{monthA}-{dayA}T00:00:00Z")
+
         else:
             ageAfter = None
         
@@ -86,10 +99,12 @@ def search_engine():
                 "3": "long"
             }
             duration = input('\n1. Short - less 4 minutes\n2. medium - from 4 to 20 minutes\n3. long - from 20 minutes\n\nEnter: ')
+
             while True:
                 if duration in durationDict:
                     duration = durationDict[duration]
                     break
+
                 else:
                     duration = input("\nEnter again: ")
         else:  
@@ -103,15 +118,18 @@ def search_engine():
 
 
     maximum = input("\nHow much do you want to receive videos?: ")
+
     while True:
         if maximum.isdigit():
             break
+
         else:
             maximum = input("\nEnter again: ")
             
     maximum = int(maximum)
     if maximum > 51:
         maximum = 50
+        
     elif maximum < 1:
         maximum = 1
 

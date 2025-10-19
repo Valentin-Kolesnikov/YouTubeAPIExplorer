@@ -1,4 +1,5 @@
 from datetime import datetime
+
 import os
 
 def output_channel_info(result, statrequests, get_answers, snistics):
@@ -9,10 +10,12 @@ def output_channel_info(result, statrequests, get_answers, snistics):
           f"Description:\n {snistics["description"]}\n"
           f"{snistics["subscriberCount"]} subs; {snistics["videoCount"]} videos; {snistics["viewCount"]} views.\n"
           f"Registration date: {snistics["publishedAt"]}\n")
+    
     print("-" * 50)
 
     if get_answers == "y":
         print(f"Your received videos:\n")
+        
     elif get_answers == "n":
         print(f"Three videos from the newest:\n")
 

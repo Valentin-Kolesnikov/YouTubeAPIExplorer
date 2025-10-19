@@ -44,20 +44,26 @@ if __name__ == "__main__":
 
                 questionist = input("What do you need to explore?: ") 
                 while True:
+                    
                     if questionist == '1':
                         launcherComments(youtube)
                         break
+
                     elif questionist == '2':
                         launcherVideos(youtube)
                         break
+
                     elif questionist == '3':
                         launcherChannels(youtube)
                         break
+
                     elif questionist == '4':
                         launcherPlaylists(youtube)
                         break
+
                     elif questionist == '0':
                         exit(0)
+
                     else:
                         questionist = input("\nEnter again: ")
 

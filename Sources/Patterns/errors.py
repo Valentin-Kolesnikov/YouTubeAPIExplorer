@@ -16,8 +16,10 @@ def http_error(exc):
     input("\nPress Enter to return...")
 
 def WinError(exc):
+    
     if exc.errno == 10054:
             print("\nConnection was forcibly closed by the remote host (WinError 10054)")
+
     else:
         print("\nUnknown connection issues.")
 

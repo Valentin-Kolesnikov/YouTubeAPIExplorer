@@ -1,5 +1,10 @@
 from googleapiclient.errors import HttpError
+
 import json
+
+
+
+
 
 def test_quota(youtube):
     try:
@@ -8,6 +13,7 @@ def test_quota(youtube):
             id="UC0PhYO05DXdztwxvRSDfSiw"
         ).execute()
         return True
+
 
     except HttpError as exc:
         status = exc.resp.status
@@ -19,11 +25,13 @@ def test_quota(youtube):
 
             if reason == "quotaExceeded":
                 print(f"\n\u001b[31mError {status}: Forbidden. You exceeded your YouTube API quota.\u001b[0m")
+
             else:
                 print(f"\n\u001b[31mUnexpected HTTP error: {status}\u001b[0m")
 
         return False
     
+
     except Exception as exc:
         print(f"Exception: {exc.resp.status}")
 

@@ -1,5 +1,8 @@
 from datetime import datetime
 
+
+
+
 def age_calendar(dateBefore=False, dateAfter=False):
     plus_year = False
     now = datetime.now()
@@ -8,12 +11,15 @@ def age_calendar(dateBefore=False, dateAfter=False):
     if year.isdigit() and 2006 <= int(year) <= now.year:
         if int(year) % 4 == 0 and int(year) % 100 != 0 or int(year) % 400 == 0:
             plus_year = True
+
     elif year.isdigit() and 6 <= int(year) <= (now.year - 2000):
         year = str(20) + str(year.zfill(2))
         if int(year) % 4 == 0 and int(year) % 100 != 0 or int(year) % 400 == 0:
             plus_year = True
+
     elif dateAfter:
         year = 2005
+
     elif dateBefore:
         year = now.year
 

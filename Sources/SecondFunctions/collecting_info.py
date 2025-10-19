@@ -1,5 +1,10 @@
 from googleapiclient.errors import HttpError
+
 from Patterns.errors import http_error, WinError
+
+
+
+
 
 def collect_searches(youtube, keywords, region, ageAfter, ageBefore, duration, maximum, which_order, dimension):
     try:
@@ -28,11 +33,13 @@ def collect_searches(youtube, keywords, region, ageAfter, ageBefore, duration, m
 
         return video_ids, channel_ids, False
     
+    
     except HttpError as exc:
         
         http_error(exc)
         
         return {}, {}, True
+    
     
     except OSError as exc:
 
@@ -68,11 +75,13 @@ def collect_stats(youtube, video_ids, channel_ids):
 
         return {}, {}, True
     
+
     except Exception:
         print("Probably, YouTube has problems with submitted objects")
 
         return {}, {}, True
         
+
     except OSError as exc:
 
         WinError(exc)
